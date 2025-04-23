@@ -1,0 +1,263 @@
+<mxfile host="Electron" modified="2024-05-22T09:50:46.392Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.4.0 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="OYpaqXjUnrNVMFMP7Hom" version="24.4.0" type="device" pages="2">
+  <diagram name="Overview" id="RMsGlZngZirzZ2NLVtrP">
+    <mxGraphModel dx="1198" dy="881" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="tOLYHJkQhkSjhKpgmJGZ-7" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;glass=1;shadow=1;" parent="1" vertex="1">
+          <mxGeometry x="1193" y="730" width="255" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="4YQ4xRSqWi1CU64gh57Y-46" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;glass=1;shadow=1;" parent="1" vertex="1">
+          <mxGeometry x="530" y="60" width="690" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="4YQ4xRSqWi1CU64gh57Y-1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;glass=1;shadow=1;" parent="1" vertex="1">
+          <mxGeometry x="300" y="380" width="250" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="tOLYHJkQhkSjhKpgmJGZ-11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="4YQ4xRSqWi1CU64gh57Y-2" target="4YQ4xRSqWi1CU64gh57Y-14" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4YQ4xRSqWi1CU64gh57Y-2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;glass=1;shadow=1;" parent="1" vertex="1">
+          <mxGeometry x="650" y="380" width="450" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="4YQ4xRSqWi1CU64gh57Y-3" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;glass=1;shadow=1;" parent="1" vertex="1">
+          <mxGeometry x="610" y="730" width="520" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="4YQ4xRSqWi1CU64gh57Y-5" value="&lt;b&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;Well Known Service&lt;/font&gt;&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="345" y="390" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="4YQ4xRSqWi1CU64gh57Y-6" value="&lt;b&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;Credential Issuing Service Frame&lt;/font&gt;&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="667" y="390" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="4YQ4xRSqWi1CU64gh57Y-8" value="&lt;b&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;Issuing Plugin&lt;/font&gt;&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="620" y="745" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="4YQ4xRSqWi1CU64gh57Y-9" value="&lt;b&gt;Well-Known-Metadata&lt;br&gt;NATS Interface&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="350" y="455" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="hhLMffct9CrnxvGc6hB4-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=classic;startFill=1;endArrow=none;endFill=0;" parent="1" source="4YQ4xRSqWi1CU64gh57Y-3" target="hhLMffct9CrnxvGc6hB4-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4YQ4xRSqWi1CU64gh57Y-10" value="&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;GET /:tenantid/credential&lt;br&gt;REST Endpoint&lt;br&gt;&lt;/font&gt;&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="767.5" y="460" width="215" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="4YQ4xRSqWi1CU64gh57Y-11" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;strokeWidth=3;" parent="1" source="4YQ4xRSqWi1CU64gh57Y-9" target="4YQ4xRSqWi1CU64gh57Y-10" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="600" y="510" as="sourcePoint" />
+            <mxPoint x="650" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4YQ4xRSqWi1CU64gh57Y-12" value="&lt;b&gt;Step 1&lt;/b&gt;: Get Well Known Metadata" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="4YQ4xRSqWi1CU64gh57Y-11" vertex="1" connectable="0">
+          <mxGeometry x="-0.2242" relative="1" as="geometry">
+            <mxPoint x="8" y="-15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tQxXZS1BUMnkkjtNzTs6-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" parent="1" source="4YQ4xRSqWi1CU64gh57Y-14" target="4YQ4xRSqWi1CU64gh57Y-51" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="890" y="330" />
+              <mxPoint x="1413" y="330" />
+              <mxPoint x="1413" y="485" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4YQ4xRSqWi1CU64gh57Y-14" value="" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
+          <mxGeometry x="860" y="260" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="4YQ4xRSqWi1CU64gh57Y-29" value="&lt;b&gt;&lt;font style=&quot;font-size: 13px;&quot;&gt;NATS Event Listener&lt;/font&gt;&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="767.5" y="810" width="215" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="4YQ4xRSqWi1CU64gh57Y-37" value="&lt;b&gt;&lt;font style=&quot;font-size: 13px;&quot;&gt;Signing endpoint&lt;/font&gt;&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1220" y="810" width="215" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="4YQ4xRSqWi1CU64gh57Y-39" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;strokeWidth=3;dashed=1;" parent="1" source="4YQ4xRSqWi1CU64gh57Y-37" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="550" y="830" as="sourcePoint" />
+            <mxPoint x="1130" y="835" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4YQ4xRSqWi1CU64gh57Y-40" value="Authorization&lt;br&gt;Bearer" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;" parent="1" vertex="1">
+          <mxGeometry x="815" y="110" width="120" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="4YQ4xRSqWi1CU64gh57Y-41" value="Format &amp;amp; types" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;" parent="1" vertex="1">
+          <mxGeometry x="1065" y="110" width="120" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="4YQ4xRSqWi1CU64gh57Y-42" value="Proof" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;" parent="1" vertex="1">
+          <mxGeometry x="940" y="110" width="120" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="4YQ4xRSqWi1CU64gh57Y-44" value="Receiver DID" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;" parent="1" vertex="1">
+          <mxGeometry x="690" y="110" width="120" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="4YQ4xRSqWi1CU64gh57Y-45" value="tenantID" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;" parent="1" vertex="1">
+          <mxGeometry x="565" y="110" width="120" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="4YQ4xRSqWi1CU64gh57Y-47" value="" style="shape=offPageConnector;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="852.5" y="190" width="45" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="4YQ4xRSqWi1CU64gh57Y-48" value="&lt;b&gt;&lt;font style=&quot;font-size: 13px;&quot;&gt;GET credential Parameters&lt;/font&gt;&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="750" y="70" width="250" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="4YQ4xRSqWi1CU64gh57Y-49" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;glass=1;shadow=1;" parent="1" vertex="1">
+          <mxGeometry x="1193" y="380" width="250" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="4YQ4xRSqWi1CU64gh57Y-50" value="&lt;b&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;Pre-Auth-Bridge&lt;/font&gt;&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="1238" y="390" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="4YQ4xRSqWi1CU64gh57Y-51" value="&lt;b&gt;Nats Interface&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1243" y="455" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="4YQ4xRSqWi1CU64gh57Y-52" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;strokeWidth=3;fillColor=#f8cecc;strokeColor=#000000;" parent="1" source="4YQ4xRSqWi1CU64gh57Y-51" target="4YQ4xRSqWi1CU64gh57Y-10" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="410" y="495" as="sourcePoint" />
+            <mxPoint x="778" y="495" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4YQ4xRSqWi1CU64gh57Y-53" value="&lt;b&gt;Step 2&lt;/b&gt;: Verify Access Token" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="4YQ4xRSqWi1CU64gh57Y-52" vertex="1" connectable="0">
+          <mxGeometry x="-0.2242" relative="1" as="geometry">
+            <mxPoint x="8" y="-15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4YQ4xRSqWi1CU64gh57Y-54" value="&lt;b&gt;Token Issuer Server&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1243" y="565" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="4YQ4xRSqWi1CU64gh57Y-57" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;strokeWidth=3;" parent="1" source="4YQ4xRSqWi1CU64gh57Y-54" target="4YQ4xRSqWi1CU64gh57Y-51" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1878" y="680" as="sourcePoint" />
+            <mxPoint x="1878" y="630" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tOLYHJkQhkSjhKpgmJGZ-1" value="&lt;b&gt;&lt;font style=&quot;font-size: 13px;&quot;&gt;Credential Content Collector&lt;/font&gt;&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="897.5" y="910" width="192.5" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="tOLYHJkQhkSjhKpgmJGZ-2" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;strokeWidth=3;" parent="1" source="tOLYHJkQhkSjhKpgmJGZ-1" target="4YQ4xRSqWi1CU64gh57Y-29" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="780" y="940" as="sourcePoint" />
+            <mxPoint x="857" y="870" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tOLYHJkQhkSjhKpgmJGZ-3" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;strokeWidth=3;fillColor=#f8cecc;strokeColor=#000000;" parent="1" source="4YQ4xRSqWi1CU64gh57Y-29" target="4YQ4xRSqWi1CU64gh57Y-10" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="404" y="705" as="sourcePoint" />
+            <mxPoint x="828" y="520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tOLYHJkQhkSjhKpgmJGZ-4" value="&lt;b&gt;Step 3&lt;/b&gt;: Request signed credential&lt;br&gt;via NATS Request/Reply" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="tOLYHJkQhkSjhKpgmJGZ-3" vertex="1" connectable="0">
+          <mxGeometry x="-0.2242" relative="1" as="geometry">
+            <mxPoint x="-107" y="-84" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tOLYHJkQhkSjhKpgmJGZ-6" value="&lt;i&gt;Each Credential Type has its own Issuing Plugin&lt;/i&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="982.5" y="755" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="tOLYHJkQhkSjhKpgmJGZ-8" value="&lt;b&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;TSA Signer&lt;/font&gt;&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="1200" y="740" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="tOLYHJkQhkSjhKpgmJGZ-9" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;strokeWidth=3;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" source="4YQ4xRSqWi1CU64gh57Y-10" target="4YQ4xRSqWi1CU64gh57Y-14" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1280" y="570" as="sourcePoint" />
+            <mxPoint x="1280" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tOLYHJkQhkSjhKpgmJGZ-12" value="" style="endArrow=block;html=1;rounded=0;strokeWidth=3;fillColor=#d5e8d4;strokeColor=#82b366;startArrow=block;startFill=1;endFill=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="4YQ4xRSqWi1CU64gh57Y-29" target="4YQ4xRSqWi1CU64gh57Y-9" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="460" y="1020" as="sourcePoint" />
+            <mxPoint x="510" y="970" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="425" y="835" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tOLYHJkQhkSjhKpgmJGZ-13" value="&lt;b&gt;&lt;font style=&quot;font-size: 13px;&quot;&gt;Well-known&lt;br&gt;metadata Publisher&lt;br&gt;&lt;/font&gt;&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="667" y="910" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="tOLYHJkQhkSjhKpgmJGZ-15" value="&lt;i&gt;Issuing Plugin Discovery via NATS broadcast:&lt;br&gt;Well-known sends message to: &amp;lt;tenantid&amp;gt;.issuing.*&amp;nbsp;&lt;br&gt;All issuing modules answer.&lt;/i&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="425" y="640" width="260" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="tOLYHJkQhkSjhKpgmJGZ-16" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;strokeWidth=3;" parent="1" source="tOLYHJkQhkSjhKpgmJGZ-13" target="4YQ4xRSqWi1CU64gh57Y-29" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="974" y="920" as="sourcePoint" />
+            <mxPoint x="915" y="870" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hhLMffct9CrnxvGc6hB4-1" value="Application" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;glass=1;shadow=1;" parent="1" vertex="1">
+          <mxGeometry x="1193" y="650" width="255" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="hhLMffct9CrnxvGc6hB4-3" value="&lt;b&gt;Step 0&lt;/b&gt;: Request Offering Link via Nats" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="827" y="639.9994117647057" as="geometry">
+            <mxPoint x="249" y="26" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hhLMffct9CrnxvGc6hB4-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;dashed=1;" parent="1" source="hhLMffct9CrnxvGc6hB4-1" target="4YQ4xRSqWi1CU64gh57Y-14" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1510" y="685" />
+              <mxPoint x="1510" y="280" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hhLMffct9CrnxvGc6hB4-5" value="&lt;b&gt;Send Offering Link to Link User&lt;/b&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="1140" y="229.99941176470566" as="geometry">
+            <mxPoint x="249" y="26" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hhLMffct9CrnxvGc6hB4-6" value="Offering User" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="767.5" y="275" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tQxXZS1BUMnkkjtNzTs6-2" value="&lt;div style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;i&gt;Signer can be a tool of choice.&lt;/i&gt;&lt;/span&gt;&lt;/div&gt;" style="text;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1230" y="920" width="310" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="tQxXZS1BUMnkkjtNzTs6-4" value="&lt;b&gt;Pickup Access Token&lt;/b&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="1000" y="289.99941176470566" as="geometry">
+            <mxPoint x="249" y="26" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="7huM8baHEKQRq61DNQVu" name="Plugins">
+    <mxGraphModel dx="826" dy="608" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="BWr-EJGkrfgkZ46jm4H9-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="2AMFZfs74D3CgK9bX-jz-1" target="2AMFZfs74D3CgK9bX-jz-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BWr-EJGkrfgkZ46jm4H9-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="2AMFZfs74D3CgK9bX-jz-1" target="BWr-EJGkrfgkZ46jm4H9-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2AMFZfs74D3CgK9bX-jz-1" value="" style="rounded=1;whiteSpace=wrap;html=1;glass=1;shadow=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="254" y="250" width="160" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="2AMFZfs74D3CgK9bX-jz-3" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.25;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="2AMFZfs74D3CgK9bX-jz-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="350" y="410" as="sourcePoint" />
+            <mxPoint x="294" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2AMFZfs74D3CgK9bX-jz-4" value="&lt;i&gt;Publishes Metadata to Nats&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="230" y="200" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="BWr-EJGkrfgkZ46jm4H9-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="2AMFZfs74D3CgK9bX-jz-6" target="2AMFZfs74D3CgK9bX-jz-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2AMFZfs74D3CgK9bX-jz-6" value="Nats" style="rounded=1;whiteSpace=wrap;html=1;glass=1;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="256" y="170" width="156" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="BWr-EJGkrfgkZ46jm4H9-1" value="Prepared&lt;div&gt;Credentials&lt;/div&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="304" y="280" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="BWr-EJGkrfgkZ46jm4H9-4" value="&lt;i&gt;Replies Offering Link&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="400" y="203" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="BWr-EJGkrfgkZ46jm4H9-5" value="&lt;i&gt;Issues Credential&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="304" y="197" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="BWr-EJGkrfgkZ46jm4H9-7" value="Optional&lt;div&gt;Endpoints or Interfaces&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="274" y="422" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="BWr-EJGkrfgkZ46jm4H9-8" value="&lt;b&gt;Plugin&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="354" y="250" width="60" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

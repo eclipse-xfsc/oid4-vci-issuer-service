@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ .Chart.Name }}"
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: "{{ .Chart.Name }}"
+spec:
+  replicas: {{ .Values.replicaCount }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: "{{ .Chart.Name }}"
+  template:
+    metadata:
+      labels:
+        app: "{{ .Chart.Name }}"
+{{- if .Values.podAnnotations }}
+      annotations:
+        {{ toYaml .Values.podAnnotations | indent 8 }}
+{{- end }}
+    spec:
+      serviceAccountName: {{ .Values.serviceAccountName }}
+{{- if .Values.image.pullSecrets }}
+      imagePullSecrets:
+        - name: {{ .Values.image.pullSecrets }}
+{{- end }}
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}/{{ .Values.image.name }}:{{ default .Chart.AppVersion .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
+        env:
+            - name: ISSUANCE_NATS_URL
+              value: {{ .Values.config.nats.url }}
+            - name: ISSUANCE_JWKSURL
+              value: {{ .Values.config.jwksUrl}}
+            - name: ISSUANCE_AUDIENCE
+              value: {{ .Values.config.audience }}
+            - name: ISSUANCE_LISTEN_ADDR
+              value: {{ .Values.server.http.host }}
+            - name: ISSUANCE_LISTEN_PORT
+              value: "{{ .Values.server.http.port }}"
+            {{- if .Values.config.database }}
+            - name: ISSUANCE_DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: "{{- .Release.Name  }}-redis"
+                  key: redis-password
+            {{- end }}
+      {{- if .Values.resources }}
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
+      {{- end }}
+        ports:
+          - containerPort: {{ .Values.config.servingPort }}
+        volumeMounts:
+          - mountPath: /app
+            name: config-volume
+      volumes:
+        - name: config-volume
+          configMap:
+            name: "{{ .Release.Name }}-configmap"
