@@ -1,4 +1,0 @@
-include:
-- project: 'eclipse/xfsc/dev-ops/ci-templates'  
-  file: 'golang-standard-ci.yaml'  
-  ref: main

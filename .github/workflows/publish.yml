@@ -8,11 +8,14 @@ on:
 jobs:
   dockerbuild:
     uses: eclipse-xfsc/dev-ops/.github/workflows/dockerbuild.yml@main
+    secrets: inherit
     with: 
-      dockerfile: "deployment/docker"
+      dockerfile: "deployment/docker/Dockerfile"
       harbor_config: "deployment/harbor.config"
+      repo_name: issuance-service
   helm:
     uses: eclipse-xfsc/dev-ops/.github/workflows/helm.yml@main
+    secrets: inherit
     with: 
       buildContext:  "deployment/helm"
       harbor_config: "deployment/harbor.config"
