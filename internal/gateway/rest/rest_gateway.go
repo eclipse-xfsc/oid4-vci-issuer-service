@@ -129,6 +129,7 @@ func (g RestGateway) RequestCredential(c *gin.Context) {
 				if c.Format == req.Format {
 					credentialConfig = c
 					req.CredentialConfigurationId = i
+					ok = true
 					break
 				}
 			}
