@@ -44,7 +44,7 @@ spec:
               value: {{ .Values.server.http.host }}
             - name: ISSUANCE_LISTEN_PORT
               value: "{{ .Values.server.http.port }}"
-            - name: DID_RESOLVER
+            - name: ISSUANCE_DID_RESOLVER
               value: {{ .Values.config.didResolver }}
       {{- if .Values.resources }}
         resources:

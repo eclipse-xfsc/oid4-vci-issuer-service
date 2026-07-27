@@ -4,6 +4,7 @@ import (
 	"context"
 	"log"
 	"net/http"
+	"os"
 
 	cloudeventprovider "github.com/eclipse-xfsc/cloud-event-provider"
 	"github.com/eclipse-xfsc/microservice-core-go/pkg/logr"
@@ -24,6 +25,9 @@ func main() {
 	if err := envconfig.Process("ISSUANCE", &conf); err != nil {
 		panic(err)
 	}
+
+	//clean up env usage
+	os.Setenv("DID_RESOLVER", conf.Resolver)
 
 	logger, err := logr.New(conf.LogLevel, conf.IsDev, nil)
 	if err != nil {

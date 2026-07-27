@@ -16,7 +16,7 @@
                 "ISSUANCE_JWKSURL":"http://localhost:8081/.well-known/jwks.json",
                 "ISSUANCE_AUDIENCE":"",    
                 "ISSUANCE_LISTEN_PORT":"8088",
-                "DID_RESOLVER":""
+                "ISSUANCE_DID_RESOLVER":""
             }
         }
     ]

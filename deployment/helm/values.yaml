@@ -15,7 +15,10 @@ image:
   # -- Image pull secret when internal image is used
   pullSecrets: key
 
-podAnnotations: {}
+podAnnotations: 
+    inject.xfsc.io/enabled: "false"
+    inject.xfsc.io/needs: "nats,preauthbridge,did-resolver"
+    inject.xfsc.io/env-prefix: "ISSUANCE"
 
 resources:
   requests:
@@ -49,6 +52,8 @@ server:
   http:
     host: 0.0.0.0
     port: 8080
+
+
 
 config:
   jwksUrl: changeme #JWKS Url to check the token against
