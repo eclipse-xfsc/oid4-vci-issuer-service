@@ -34,18 +34,20 @@ spec:
         image: "{{ .Values.image.repository }}/{{ .Values.image.name }}:{{ default .Chart.AppVersion .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
         env:
+        {{- if eq (index .Values.podAnnotations "inject.xfsc.io/enabled") "false" }}
             - name: ISSUANCE_NATS_URL
               value: {{ .Values.config.nats.url }}
             - name: ISSUANCE_JWKSURL
               value: {{ .Values.config.jwksUrl}}
+            - name: ISSUANCE_DID_RESOLVER
+              value: {{ .Values.config.didResolver }}
+        {{- end }}
             - name: ISSUANCE_AUDIENCE
               value: {{ .Values.config.audience }}
             - name: ISSUANCE_LISTEN_ADDR
               value: {{ .Values.server.http.host }}
             - name: ISSUANCE_LISTEN_PORT
               value: "{{ .Values.server.http.port }}"
-            - name: ISSUANCE_DID_RESOLVER
-              value: {{ .Values.config.didResolver }}
       {{- if .Values.resources }}
         resources:
 {{ toYaml .Values.resources | indent 10 }}
