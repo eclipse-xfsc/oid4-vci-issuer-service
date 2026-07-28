@@ -5,14 +5,12 @@ import (
 	"errors"
 	"net/http"
 	"slices"
-	"time"
 
 	"github.com/eclipse-xfsc/microservice-core-go/pkg/logr"
 	"github.com/eclipse-xfsc/nats-message-library/common"
 	"github.com/eclipse-xfsc/oid4-vci-issuer-service/internal/service"
 	"github.com/eclipse-xfsc/oid4-vci-vp-library/model/credential"
 	crypto "github.com/eclipse-xfsc/ssi-jwt/v2"
-	"github.com/eclipse-xfsc/ssi-jwt/v2/fetcher"
 	"github.com/gin-gonic/gin"
 	"github.com/lestrrat-go/jwx/v2/jwt"
 )
@@ -21,17 +19,15 @@ type RestGateway struct {
 	svc      service.CredentialService
 	log      logr.Logger
 	audience string
+	jwksUrl  string
 }
 
 func NewGateway(svc service.CredentialService, log logr.Logger, jwksUrl string, audience string) RestGateway {
-	jwksFetcher := new(fetcher.JwksFetcher)
-	jwksFetcher.Initialize([]string{jwksUrl}, time.Minute*15)
-	crypto.RegisterFetcher("JWKS1", jwksFetcher)
-
 	return RestGateway{
 		svc:      svc,
 		log:      log,
 		audience: audience,
+		jwksUrl:  jwksUrl,
 	}
 }
 
@@ -39,7 +35,14 @@ func (g RestGateway) RequestCredential(c *gin.Context) {
 	var token jwt.Token
 	var err error
 
-	if token, err = crypto.ParseRequest(c.Request); err != nil {
+	jwksURL := g.jwksUrl // Default
+
+	if header := c.GetHeader("x-jwks-url"); header != "" {
+
+		jwksURL = header
+
+	}
+	if token, err = crypto.ParseRequestWithJWKS(c.Request, jwksURL); err != nil {
 		c.AbortWithError(http.StatusUnauthorized, err)
 		return
 	}
