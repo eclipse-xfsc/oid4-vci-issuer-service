@@ -1,62 +1,83 @@
 apiVersion: apps/v1
 kind: Deployment
+
 metadata:
-  name: "{{ .Chart.Name }}"
-  namespace: {{ .Release.Namespace }}
+  name: {{ .Chart.Name | quote }}
+  namespace: {{ .Release.Namespace | quote }}
   labels:
-    app: "{{ .Chart.Name }}"
+    app: {{ .Chart.Name | quote }}
+
 spec:
   replicas: {{ .Values.replicaCount }}
+
   strategy:
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 1
       maxUnavailable: 0
+
   selector:
     matchLabels:
-      app: "{{ .Chart.Name }}"
+      app: {{ .Chart.Name | quote }}
+
   template:
     metadata:
       labels:
-        app: "{{ .Chart.Name }}"
-{{- if .Values.podAnnotations }}
+        app: {{ .Chart.Name | quote }}
+      {{- with .Values.podAnnotations }}
       annotations:
-        {{ toYaml .Values.podAnnotations | indent 8 }}
-{{- end }}
-    spec:
-      serviceAccountName: {{ .Values.serviceAccountName }}
-{{- if .Values.image.pullSecrets }}
-      imagePullSecrets:
-        - name: {{ .Values.image.pullSecrets }}
-{{- end }}
-      containers:
-      - name: {{ .Chart.Name }}
-        image: "{{ .Values.image.repository }}/{{ .Values.image.name }}:{{ default .Chart.AppVersion .Values.image.tag }}"
-        imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
-        env:
-        {{- if eq (index .Values.podAnnotations "inject.xfsc.io/enabled") "false" }}
-            - name: ISSUANCE_NATS_URL
-              value: {{ .Values.config.nats.url }}
-            - name: ISSUANCE_JWKSURL
-              value: {{ .Values.config.jwksUrl}}
-            - name: ISSUANCE_DID_RESOLVER
-              value: {{ .Values.config.didResolver }}
-        {{- end }}
-            - name: ISSUANCE_AUDIENCE
-              value: {{ .Values.config.audience }}
-            - name: ISSUANCE_LISTEN_ADDR
-              value: {{ .Values.server.http.host }}
-            - name: ISSUANCE_LISTEN_PORT
-              value: "{{ .Values.server.http.port }}"
-      {{- if .Values.resources }}
-        resources:
-{{ toYaml .Values.resources | indent 10 }}
+        {{- toYaml . | nindent 8 }}
       {{- end }}
-        ports:
-          - containerPort: {{ .Values.config.servingPort }}
-        volumeMounts:
-          - mountPath: /app
-            name: config-volume
+
+    spec:
+      serviceAccountName: {{ .Values.serviceAccountName | quote }}
+
+      {{- with .Values.image.pullSecrets }}
+      imagePullSecrets:
+        - name: {{ . | quote }}
+      {{- end }}
+
+      containers:
+        - name: {{ .Chart.Name | quote }}
+          image: "{{ .Values.image.repository }}/{{ .Values.image.name }}:{{ default .Chart.AppVersion .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
+
+          env:
+            {{- $podAnnotations := default dict .Values.podAnnotations }}
+            {{- if eq (default "" (index $podAnnotations "inject.xfsc.io/enabled")) "false" }}
+            - name: ISSUANCE_NATS_URL
+              value: {{ .Values.config.nats.url | quote }}
+
+            - name: ISSUANCE_JWKSURL
+              value: {{ .Values.config.jwksUrl | quote }}
+
+            - name: ISSUANCE_DID_RESOLVER
+              value: {{ .Values.config.didResolver | quote }}
+            {{- end }}
+
+            - name: ISSUANCE_AUDIENCE
+              value: {{ .Values.config.audience | quote }}
+
+            - name: ISSUANCE_LISTEN_ADDR
+              value: {{ .Values.server.http.host | quote }}
+
+            - name: ISSUANCE_LISTEN_PORT
+              value: {{ .Values.server.http.port | quote }}
+
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+
+          ports:
+            - name: http
+              containerPort: {{ .Values.config.servingPort }}
+              protocol: TCP
+
+          volumeMounts:
+            - name: config-volume
+              mountPath: /app
+
       volumes:
         - name: config-volume
           configMap:
