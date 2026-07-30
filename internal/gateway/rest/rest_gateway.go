@@ -42,6 +42,15 @@ func (g RestGateway) RequestCredential(c *gin.Context) {
 		jwksURL = header
 
 	}
+
+	audience := g.audience // Default
+
+	if header := c.GetHeader("x-audience-url"); header != "" {
+
+		audience = header
+
+	}
+
 	if token, err = crypto.ParseRequestWithJWKS(c.Request, jwksURL); err != nil {
 		c.AbortWithError(http.StatusUnauthorized, err)
 		return
@@ -138,7 +147,7 @@ func (g RestGateway) RequestCredential(c *gin.Context) {
 			}
 		}
 
-		err := req.Proof.CheckProof(g.audience, authRep.Nonce, credentialConfig.ProofTypesSupported)
+		err := req.Proof.CheckProof(audience, authRep.Nonce, credentialConfig.ProofTypesSupported)
 
 		if err != nil {
 			g.log.Error(err, "proof invalid")

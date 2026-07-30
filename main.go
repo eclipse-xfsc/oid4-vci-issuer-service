@@ -26,15 +26,26 @@ func main() {
 		panic(err)
 	}
 
-	//clean up env usage
-	os.Setenv("DID_RESOLVER", conf.Resolver)
-
 	logger, err := logr.New(conf.LogLevel, conf.IsDev, nil)
 	if err != nil {
 		panic(err)
 	}
-
 	logger.Info("starting service...")
+	//clean up env usage
+	if conf.Resolver == "" {
+		panic("No did resolver configured")
+	}
+
+	os.Setenv("DID_RESOLVER", conf.Resolver)
+
+	if conf.Audience == "" {
+		logger.Info("Audience not in ENV, use x-audience-url in credential request")
+	}
+
+	if conf.JwksUrl == "" {
+		logger.Info("JwksUrl not in ENV, use x-jwks-url in credential request")
+	}
+
 	errGrp, ctx := errgroup.WithContext(context.Background())
 
 	// Will be kept for later retry purposes

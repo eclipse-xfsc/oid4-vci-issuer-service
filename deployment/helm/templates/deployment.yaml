@@ -45,18 +45,19 @@ spec:
           env:
             {{- $podAnnotations := default dict .Values.podAnnotations }}
             {{- if eq (default "" (index $podAnnotations "inject.xfsc.io/enabled")) "false" }}
+              # injected
             - name: ISSUANCE_NATS_URL
-              value: {{ .Values.config.nats.url | quote }}
-
+              value: {{ .Values.config.nats.url }}
+            # x-jwks-url if not set
             - name: ISSUANCE_JWKSURL
-              value: {{ .Values.config.jwksUrl | quote }}
-
+              value: {{ .Values.config.jwksUrl}}
+            # injected
             - name: ISSUANCE_DID_RESOLVER
-              value: {{ .Values.config.didResolver | quote }}
-            {{- end }}
-
+              value: {{ .Values.config.didResolver }}
+            # x-audience-url if not set
             - name: ISSUANCE_AUDIENCE
-              value: {{ .Values.config.audience | quote }}
+              value: {{ .Values.config.audience }}
+            {{- end }}
 
             - name: ISSUANCE_LISTEN_ADDR
               value: {{ .Values.server.http.host | quote }}
