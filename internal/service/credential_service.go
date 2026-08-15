@@ -133,7 +133,8 @@ func (s CredentialService) Offer(ctx context.Context, req messaging.OfferingURLR
 
 }
 
-func (s CredentialService) GetCredential(ctx context.Context, authRep *preAuth.ValidateAuthenticationRep, req credential.CredentialRequest, code string, audience string) (*types.GetCredentialRespImmediate, error) {
+func (s CredentialService) GetCredential(ctx context.Context, authRep *preAuth.ValidateAuthenticationRep,
+	req credential.CredentialRequest, code, audience, signerKey, groupId string) (*types.GetCredentialRespImmediate, error) {
 
 	identifier := credential.CredentialConfigurationIdentifier{
 		Id: req.CredentialConfigurationId,
@@ -164,6 +165,8 @@ func (s CredentialService) GetCredential(ctx context.Context, authRep *preAuth.V
 		Subject:                 cmReq.BuildSubject(),
 		Code:                    code,
 		Origin:                  audience,
+		GroupId:                 groupId,
+		SignerKey:               signerKey,
 	}
 
 	if req.Proof != nil {

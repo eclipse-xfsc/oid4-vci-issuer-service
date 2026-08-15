@@ -51,6 +51,20 @@ func (g RestGateway) RequestCredential(c *gin.Context) {
 
 	}
 
+	signerKey := "signerKey" // Default
+
+	if header := c.GetHeader("x-signerkey"); header != "" {
+		signerKey = header
+
+	}
+
+	groupId := "" // Default
+
+	if header := c.GetHeader("x-groupId"); header != "" {
+		groupId = header
+
+	}
+
 	if token, err = crypto.ParseRequestWithJWKS(c.Request, jwksURL); err != nil {
 		c.AbortWithError(http.StatusUnauthorized, err)
 		return
@@ -188,7 +202,7 @@ func (g RestGateway) RequestCredential(c *gin.Context) {
 		return
 	}
 
-	cred, err := g.svc.GetCredential(c, authRep, req, cc, audience)
+	cred, err := g.svc.GetCredential(c, authRep, req, cc, audience, signerKey, groupId)
 	if err != nil {
 		g.log.Error(err, "Error during Get Credential")
 		c.JSON(400, credential.ErrInvalidCredentialRequest)
