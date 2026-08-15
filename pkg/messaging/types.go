@@ -71,6 +71,7 @@ type IssuanceModuleReq struct {
 	Nonce                   string
 	Holder                  string
 	ProofType               string
+	Origin                  string
 }
 
 type IssuanceModuleRep struct {

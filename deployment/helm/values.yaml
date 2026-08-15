@@ -17,7 +17,7 @@ image:
 
 podAnnotations: 
     inject.xfsc.io/enabled: "false"
-    inject.xfsc.io/needs: "nats,preauthbridge,did-resolver"
+    inject.xfsc.io/needs: "nats,did-resolver"
     inject.xfsc.io/env-prefix: "ISSUANCE"
 
 resources:

@@ -188,7 +188,7 @@ func (g RestGateway) RequestCredential(c *gin.Context) {
 		return
 	}
 
-	cred, err := g.svc.GetCredential(c, authRep, req, cc)
+	cred, err := g.svc.GetCredential(c, authRep, req, cc, audience)
 	if err != nil {
 		g.log.Error(err, "Error during Get Credential")
 		c.JSON(400, credential.ErrInvalidCredentialRequest)
