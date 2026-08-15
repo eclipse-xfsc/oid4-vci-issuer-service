@@ -111,7 +111,7 @@ func (g RestGateway) RequestCredential(c *gin.Context) {
 		return
 	}
 
-	authRep, err := g.svc.VerifyAuthToken(c.Request.Context(), c.Request.Header.Get("Authorization"))
+	authRep, err := g.svc.VerifyAuthToken(c.Request.Context(), tenantID, groupId, c.Request.Header.Get("Authorization"))
 
 	if err != nil {
 		g.log.Error(err, err.Error())
@@ -202,7 +202,7 @@ func (g RestGateway) RequestCredential(c *gin.Context) {
 		return
 	}
 
-	cred, err := g.svc.GetCredential(c, authRep, req, cc, audience, signerKey, groupId)
+	cred, err := g.svc.GetCredential(c, authRep, req, cc, audience, signerKey)
 	if err != nil {
 		g.log.Error(err, "Error during Get Credential")
 		c.JSON(400, credential.ErrInvalidCredentialRequest)

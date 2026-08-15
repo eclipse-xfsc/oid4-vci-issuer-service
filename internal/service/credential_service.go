@@ -134,7 +134,7 @@ func (s CredentialService) Offer(ctx context.Context, req messaging.OfferingURLR
 }
 
 func (s CredentialService) GetCredential(ctx context.Context, authRep *preAuth.ValidateAuthenticationRep,
-	req credential.CredentialRequest, code, audience, signerKey, groupId string) (*types.GetCredentialRespImmediate, error) {
+	req credential.CredentialRequest, code, audience, signerKey string) (*types.GetCredentialRespImmediate, error) {
 
 	identifier := credential.CredentialConfigurationIdentifier{
 		Id: req.CredentialConfigurationId,
@@ -165,7 +165,6 @@ func (s CredentialService) GetCredential(ctx context.Context, authRep *preAuth.V
 		Subject:                 cmReq.BuildSubject(),
 		Code:                    code,
 		Origin:                  audience,
-		GroupId:                 groupId,
 		SignerKey:               signerKey,
 	}
 
@@ -314,7 +313,7 @@ func (s CredentialService) GetCompleteCredentialIssuer(ctx context.Context, tena
 	return credentialIssuer.Issuer, nil
 }
 
-func (s CredentialService) VerifyAuthToken(ctx context.Context, headerValue string) (*preAuth.ValidateAuthenticationRep, error) {
+func (s CredentialService) VerifyAuthToken(ctx context.Context, tenantId, groupId, headerValue string) (*preAuth.ValidateAuthenticationRep, error) {
 	if headerValue == "" {
 		return nil, fmt.Errorf("missing Authorization")
 	}
@@ -329,6 +328,8 @@ func (s CredentialService) VerifyAuthToken(ctx context.Context, headerValue stri
 	req := preAuth.ValidateAuthenticationReq{
 		Request: common.Request{
 			RequestId: uuid.NewString(),
+			TenantId:  tenantId,
+			GroupId:   groupId,
 		},
 		Params: preAuth.ValidateAuthenticationReqParams{
 			Key: token,
