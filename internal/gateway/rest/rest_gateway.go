@@ -77,7 +77,7 @@ func (g RestGateway) RequestCredential(c *gin.Context) {
 
 	group := "" // Default
 	if header := c.GetHeader("x-group"); header != "" {
-		groupId = header
+		group = header
 
 	}
 
