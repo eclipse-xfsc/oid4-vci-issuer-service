@@ -69,13 +69,27 @@ func (g RestGateway) RequestCredential(c *gin.Context) {
 
 	}
 
+	namespace := "" // Default
+	if header := c.GetHeader("x-namespace"); header != "" {
+		namespace = header
+
+	}
+
+	group := "" // Default
+	if header := c.GetHeader("x-group"); header != "" {
+		groupId = header
+
+	}
+
 	if token, err = crypto.ParseRequestWithJWKS(c.Request, jwksURL); err != nil {
 		g.log.Info("Parameters:", "data", map[string]string{
 			"audience":  audience,
 			"jwks":      jwksURL,
-			"group":     groupId,
+			"groupId":   groupId,
+			"group":     group,
 			"tenantid":  tenantID,
 			"signerkey": signerKey,
+			"namespace": namespace,
 		})
 		c.AbortWithError(http.StatusUnauthorized, err)
 		return
@@ -205,7 +219,7 @@ func (g RestGateway) RequestCredential(c *gin.Context) {
 		return
 	}
 
-	cred, err := g.svc.GetCredential(c, authRep, req, cc, audience, signerKey)
+	cred, err := g.svc.GetCredential(c, authRep, req, cc, audience, signerKey, namespace, group)
 	if err != nil {
 		g.log.Error(err, "Error during Get Credential")
 		c.JSON(400, credential.ErrInvalidCredentialRequest)

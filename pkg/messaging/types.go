@@ -73,6 +73,8 @@ type IssuanceModuleReq struct {
 	ProofType               string
 	Origin                  string
 	SignerKey               string
+	Namespace               string
+	Group                   string
 }
 
 type IssuanceModuleRep struct {
