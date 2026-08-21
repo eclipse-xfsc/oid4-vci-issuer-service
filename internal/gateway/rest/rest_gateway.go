@@ -179,7 +179,7 @@ func (g RestGateway) RequestCredential(c *gin.Context) {
 		}
 
 		if len(credentialConfig.ProofTypesSupported) > 0 {
-			if req.Proof != nil {
+			if req.Proof == nil {
 				g.log.Error(err, "proof missing")
 				c.JSON(400, credential.ErrInvalidProof)
 				return
