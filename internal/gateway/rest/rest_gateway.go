@@ -70,7 +70,7 @@ func (g RestGateway) RequestCredential(c *gin.Context) {
 	}
 
 	if token, err = crypto.ParseRequestWithJWKS(c.Request, jwksURL); err != nil {
-		g.log.Info("Parameters:", map[string]string{
+		g.log.Info("Parameters:", "data", map[string]string{
 			"audience":  audience,
 			"jwks":      jwksURL,
 			"group":     groupId,
