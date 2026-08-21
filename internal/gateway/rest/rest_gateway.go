@@ -178,12 +178,20 @@ func (g RestGateway) RequestCredential(c *gin.Context) {
 			}
 		}
 
-		err := req.Proof.CheckProof(audience, authRep.Nonce, credentialConfig.ProofTypesSupported)
+		if len(credentialConfig.ProofTypesSupported) > 0 {
+			if req.Proof != nil {
+				g.log.Error(err, "proof missing")
+				c.JSON(400, credential.ErrInvalidProof)
+				return
+			}
 
-		if err != nil {
-			g.log.Error(err, "proof invalid")
-			c.JSON(400, credential.ErrInvalidProof)
-			return
+			err := req.Proof.CheckProof(audience, authRep.Nonce, credentialConfig.ProofTypesSupported)
+
+			if err != nil {
+				g.log.Error(err, "proof invalid")
+				c.JSON(400, credential.ErrInvalidProof)
+				return
+			}
 		}
 
 		if err != nil || metadata == nil || !ok {
