@@ -71,7 +71,7 @@ func (g NatsGateway) offerListener(ctx context.Context) error {
 }
 
 func (g NatsGateway) offerHandler(ctx context.Context, event event.Event) (*event.Event, error) {
-	g.log.Info("Offer request received", event.Data())
+	g.log.Info("Offer request received", "data", string(event.Data()))
 	var req messaging.OfferingURLReq
 	if err := json.Unmarshal(event.Data(), &req); err != nil {
 		g.log.Error(err, "could not unmarshal offer")
@@ -101,6 +101,8 @@ func (g NatsGateway) offerHandler(ctx context.Context, event event.Event) (*even
 		g.log.Error(err, "could not marshal credentialOfferUrl to offerReplyData")
 		return nil, err
 	}
+
+	g.log.Info("Offer Reply Data", "data", string(offerReplyData))
 
 	offerReplyEvent, err := cloudeventprovider.NewEvent(SourceIssuanceService, messaging.EventTypeOffering, offerReplyData)
 	if err != nil {
