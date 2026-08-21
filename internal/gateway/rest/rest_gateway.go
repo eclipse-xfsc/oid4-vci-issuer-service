@@ -35,20 +35,24 @@ func (g RestGateway) RequestCredential(c *gin.Context) {
 	var token jwt.Token
 	var err error
 
+	tenantID := c.Param("tenantId")
+
+	if tenantID == "" {
+		g.log.Error(errors.ErrUnsupported, "Tenant ID Empty.", nil)
+		c.JSON(400, map[string]string{"error": "Tenant ID Empty"})
+		return
+	}
+
 	jwksURL := g.jwksUrl // Default
 
 	if header := c.GetHeader("x-jwks-url"); header != "" {
-
 		jwksURL = header
-
 	}
 
 	audience := g.audience // Default
 
 	if header := c.GetHeader("x-audience-url"); header != "" {
-
 		audience = header
-
 	}
 
 	signerKey := "signerKey" // Default
@@ -66,6 +70,13 @@ func (g RestGateway) RequestCredential(c *gin.Context) {
 	}
 
 	if token, err = crypto.ParseRequestWithJWKS(c.Request, jwksURL); err != nil {
+		g.log.Info("Parameters:", map[string]string{
+			"audience":  audience,
+			"jwks":      jwksURL,
+			"group":     groupId,
+			"tenantid":  tenantID,
+			"signerkey": signerKey,
+		})
 		c.AbortWithError(http.StatusUnauthorized, err)
 		return
 	}
@@ -100,14 +111,6 @@ func (g RestGateway) RequestCredential(c *gin.Context) {
 	if req.CredentialConfigurationId == "" && req.Format == "" && req.CredentialIdentifier == "" {
 		g.log.Error(errors.New("missing credential configuration or format"), "missing credential identifier, credentialconfiguration or format")
 		c.JSON(400, credential.ErrUnsupportedCredentialFormat)
-		return
-	}
-
-	tenantID := c.Param("tenantId")
-
-	if tenantID == "" {
-		g.log.Error(errors.ErrUnsupported, "Tenant ID Empty.", nil)
-		c.JSON(400, map[string]string{"error": "Tenant ID Empty"})
 		return
 	}
 
