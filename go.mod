@@ -6,9 +6,14 @@ require (
 	github.com/cloudevents/sdk-go/v2 v2.15.2
 	github.com/eclipse-xfsc/cloud-event-provider v0.1.5
 	github.com/eclipse-xfsc/microservice-core-go v1.1.0
+	github.com/eclipse-xfsc/nats-message-library v1.3.0
+	github.com/eclipse-xfsc/oid4-vci-authorization-bridge/v2 v2.2.0
+	github.com/eclipse-xfsc/oid4-vci-vp-library v1.6.5
+	github.com/eclipse-xfsc/ssi-jwt/v2 v2.3.1
 	github.com/gin-gonic/gin v1.10.0
 	github.com/google/uuid v1.6.0
 	github.com/kelseyhightower/envconfig v1.4.0
+	github.com/lestrrat-go/jwx/v2 v2.1.6
 	github.com/swaggo/gin-swagger v1.6.0
 	github.com/swaggo/swag v1.16.4
 	golang.org/x/sync v0.18.0
@@ -38,10 +43,6 @@ require (
 	github.com/eclipse-xfsc/crypto-provider-core/v2 v2.0.0 // indirect
 	github.com/eclipse-xfsc/crypto-provider-service v1.1.6 // indirect
 	github.com/eclipse-xfsc/did-core/v2 v2.1.0 // indirect
-	github.com/eclipse-xfsc/nats-message-library v1.3.0 // indirect
-	github.com/eclipse-xfsc/oid4-vci-authorization-bridge/v2 v2.2.0 // indirect
-	github.com/eclipse-xfsc/oid4-vci-vp-library v1.6.5 // indirect
-	github.com/eclipse-xfsc/ssi-jwt/v2 v2.3.0 // indirect
 	github.com/eclipse/paho.golang v0.12.0 // indirect
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.9 // indirect
@@ -77,7 +78,6 @@ require (
 	github.com/lestrrat-go/httpcc v1.0.1 // indirect
 	github.com/lestrrat-go/httprc v1.0.6 // indirect
 	github.com/lestrrat-go/iter v1.0.2 // indirect
-	github.com/lestrrat-go/jwx/v2 v2.1.6 // indirect
 	github.com/lestrrat-go/option v1.0.1 // indirect
 	github.com/madflojo/tasks v1.2.1 // indirect
 	github.com/mailru/easyjson v0.9.0 // indirect
