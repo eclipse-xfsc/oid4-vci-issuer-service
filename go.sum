@@ -68,6 +68,8 @@ github.com/eclipse-xfsc/crypto-provider-core v1.4.1 h1:qRPfErTz4b2ea4QnFuRBLHyVX
 github.com/eclipse-xfsc/crypto-provider-core v1.4.1/go.mod h1:dkIbKR46k3rwBY85gpgLbElrd/7/S78oKH8D/E1Rl+4=
 github.com/eclipse-xfsc/crypto-provider-core/v2 v2.0.0 h1:/uPlIaOufgCol1ZUpPY/0PyOIbvmV/4Au+LaCVnCvA0=
 github.com/eclipse-xfsc/crypto-provider-core/v2 v2.0.0/go.mod h1:hGNyvd79fLlKlN10VsturS7zHEGyHTpYLMSvIdL8ZoQ=
+github.com/eclipse-xfsc/crypto-provider-core/v2 v2.1.0 h1:zxhCNwkmtV0i0f7zsRmBYGIe9k0EEpJs2FxQxyRbIns=
+github.com/eclipse-xfsc/crypto-provider-core/v2 v2.1.0/go.mod h1:hGNyvd79fLlKlN10VsturS7zHEGyHTpYLMSvIdL8ZoQ=
 github.com/eclipse-xfsc/crypto-provider-service v1.1.6 h1:NxmZds7ojtKbnaEtsR/DVfUukhPO1Zx+3ruhb4JPy9o=
 github.com/eclipse-xfsc/crypto-provider-service v1.1.6/go.mod h1:102kHvz3tw3aqBe1ACSC7KFO3GR0KZS0DFCeFZyEekQ=
 github.com/eclipse-xfsc/did-core v1.0.2 h1:UDqmuBqqaO07jSqW7RhjNkRpENDGJgJ0GderaKNO8kM=
@@ -78,6 +80,8 @@ github.com/eclipse-xfsc/did-core/v2 v2.1.0 h1:56fifKCHqw2WrCxBC3PERRh0Qqv+rd9gg+
 github.com/eclipse-xfsc/did-core/v2 v2.1.0/go.mod h1:JvGH0Au3l53zPJ4ear8OOVuInjeJ/G+olYyLQAj5g/c=
 github.com/eclipse-xfsc/microservice-core-go v1.1.0 h1:Uyhk64iNiRELS6vjPNZfGKCvRUdpQp39n2oUKS4LBKM=
 github.com/eclipse-xfsc/microservice-core-go v1.1.0/go.mod h1:pMkUXQ6E3XLPzYhdHCwMEWx/as6QCaLdQguIFDbORlI=
+github.com/eclipse-xfsc/microservice-core-go v1.1.2 h1:B4Svh4+CzH4k67BSnT3tUnS84VX74VQk+S4OWOWRCuU=
+github.com/eclipse-xfsc/microservice-core-go v1.1.2/go.mod h1:YRLyt66TYC1Km40w6oagYrXjrMCyI1tym2wGEgWQ9pI=
 github.com/eclipse-xfsc/nats-message-library v1.1.13 h1:512BiQ+w7OpzJShWZ/c73BXF/0S45J2iw9pyOCCiMvQ=
 github.com/eclipse-xfsc/nats-message-library v1.1.13/go.mod h1:BuyOjgbVrW+9fwh7EurE4LcdsrSjF6UHHiWHTOL0Ojs=
 github.com/eclipse-xfsc/nats-message-library v1.2.0 h1:AuNxRQ1y/uHsxwaKtYYJ3MpdWWqr0+X32iQgdRj8qrU=
@@ -96,6 +100,8 @@ github.com/eclipse-xfsc/oid4-vci-authorization-bridge/v2 v2.1.0 h1:p2fnMMaMvtL4X
 github.com/eclipse-xfsc/oid4-vci-authorization-bridge/v2 v2.1.0/go.mod h1:nEy+1fX4rQqB8nQIMGjRV5KQi34QohQ2n5OxnAj6tUQ=
 github.com/eclipse-xfsc/oid4-vci-authorization-bridge/v2 v2.2.0 h1:2PuchKoAP3zG4v4/gGowKLPTBsMNSmkW0UUgEY9L74w=
 github.com/eclipse-xfsc/oid4-vci-authorization-bridge/v2 v2.2.0/go.mod h1:cpCpytYz0PH1FaxVBGZNld+6NaPjmJi8WEC90gvDD6c=
+github.com/eclipse-xfsc/oid4-vci-authorization-bridge/v2 v2.5.0-oidvci10 h1:c9Uuap8mb4K0HvrIOfOOfLs0ojimQ/ic77eZh8LLdts=
+github.com/eclipse-xfsc/oid4-vci-authorization-bridge/v2 v2.5.0-oidvci10/go.mod h1:bz8GL+LMVLr98aoXIwvyTdj+XUGR0zHdv5D4S6WqMe4=
 github.com/eclipse-xfsc/oid4-vci-vp-library v1.4.6 h1:7s9z5MMesQyCx4BgWPzG6CovBunLnBqmSKwDzTqa+6A=
 github.com/eclipse-xfsc/oid4-vci-vp-library v1.4.6/go.mod h1:EW5YtHCsHsRdAuxF8Xp5a7PRi1kzsAETXf4+0RH3wyw=
 github.com/eclipse-xfsc/oid4-vci-vp-library v1.5.0 h1:wq+jzuXbAILEeksYUqLCYJpM8p5F2aZIjKc1g5VU6wQ=
@@ -110,6 +116,8 @@ github.com/eclipse-xfsc/oid4-vci-vp-library v1.6.4 h1:ralSQuPKDKlAuEEe3ta0gNTFsk
 github.com/eclipse-xfsc/oid4-vci-vp-library v1.6.4/go.mod h1:0SLW2+MoLNnK0XaUGJlWxrzQbkWVDLHwxKALqm3LPCk=
 github.com/eclipse-xfsc/oid4-vci-vp-library v1.6.5 h1:MpOhZo7rXOIUTmXBYg2JYL4Qkogv3Uzc0x0QpBkA08I=
 github.com/eclipse-xfsc/oid4-vci-vp-library v1.6.5/go.mod h1:0SLW2+MoLNnK0XaUGJlWxrzQbkWVDLHwxKALqm3LPCk=
+github.com/eclipse-xfsc/oid4-vci-vp-library v1.7.0-oidvci10 h1:WFtmznee22RT3IpHUxNJOpoB0eg+9H6+c3xmP3nIy3M=
+github.com/eclipse-xfsc/oid4-vci-vp-library v1.7.0-oidvci10/go.mod h1:z3IaBHrKd+ku3eDMDSMSpWLsLNJY/Qn1kZgZE88uC60=
 github.com/eclipse-xfsc/ssi-jwt v1.2.1 h1:LQRhJ3Uw7sHmMS51RGHPsgUDbQkKO1NAPlB53VldcnQ=
 github.com/eclipse-xfsc/ssi-jwt v1.2.1/go.mod h1:sYdF2Y0BYEjui8QD++K0kti+8N0riH+aTlf+ynjmQFw=
 github.com/eclipse-xfsc/ssi-jwt/v2 v2.0.2 h1:1bqoAS/ReyEW0LCxPyjwCAjov4FdbrjzwyFFYJALnXY=
@@ -176,6 +184,7 @@ github.com/gofiber/fiber/v2 v2.52.2 h1:b0rYH6b06Df+4NyrbdptQL8ifuxw/Tf2DgfkZkDax
 github.com/gofiber/fiber/v2 v2.52.2/go.mod h1:KEOE+cXMhXG0zHc9d8+E38hoX+ZN7bhOtgeF2oT6jrQ=
 github.com/golang-jwt/jwt v3.2.2+incompatible/go.mod h1:8pz2t5EyA70fFQQSrl6XZXzqecmYZeUEB8OUGHkxJ+I=
 github.com/golang-migrate/migrate/v4 v4.18.2/go.mod h1:2CM6tJvn2kqPXwnXO/d3rAQYiyoIm180VsO8PRX6Rpk=
+github.com/golang-migrate/migrate/v4 v4.19.0/go.mod h1:9dyEcu+hO+G9hPSw8AIg50yg622pXJsoHItQnDGZkI0=
 github.com/golang/glog v1.2.5/go.mod h1:6AhwSGph0fcJtXVM/PEHPqZlFeoLxhs7/t5UDAwmO+w=
 github.com/golang/protobuf v1.3.1/go.mod h1:6lQm79b+lXiMfvg/cZm0SGofjICqVBUtrP5yJMmIC1U=
 github.com/golang/protobuf v1.5.0/go.mod h1:FsONVRAS9T7sI+LIUmWTfcYkHO4aIWwzhcaSAoJOfIk=
@@ -421,6 +430,7 @@ go.opentelemetry.io/otel/metric v1.38.0/go.mod h1:kB5n/QoRM8YwmUahxvI3bO34eVtQf2
 go.opentelemetry.io/otel/sdk v1.38.0/go.mod h1:ghmNdGlVemJI3+ZB5iDEuk4bWA3GkTpW+DOoZMYBVVg=
 go.opentelemetry.io/otel/sdk/metric v1.38.0/go.mod h1:dg9PBnW9XdQ1Hd6ZnRz689CbtrUp0wMMs9iPcgT9EZA=
 go.opentelemetry.io/otel/trace v1.38.0/go.mod h1:j1P9ivuFsTceSWe1oY+EeW3sc+Pp42sO++GHkg4wwhs=
+go.uber.org/atomic v1.9.0/go.mod h1:fEN4uk6kAWBTFdckzkM89CLk9XfWZrxpCo0nPH17wJc=
 go.uber.org/atomic v1.11.0/go.mod h1:LUxbIzbOniOlMKjJjyPfpl4v+PKK2cNJn91OQbhoJI0=
 go.uber.org/goleak v1.3.0 h1:2K3zAYmnTNqV73imy9J1T3WC+gmCePx2hEGkimedGto=
 go.uber.org/goleak v1.3.0/go.mod h1:CoHD4mav9JJNrW/WLlf7HGZPjdw8EucARQHekz1X6bE=

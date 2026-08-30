@@ -5,10 +5,10 @@ go 1.24.0
 require (
 	github.com/cloudevents/sdk-go/v2 v2.15.2
 	github.com/eclipse-xfsc/cloud-event-provider v0.1.5
-	github.com/eclipse-xfsc/microservice-core-go v1.1.0
+	github.com/eclipse-xfsc/microservice-core-go v1.1.2
 	github.com/eclipse-xfsc/nats-message-library v1.3.0
-	github.com/eclipse-xfsc/oid4-vci-authorization-bridge/v2 v2.2.0
-	github.com/eclipse-xfsc/oid4-vci-vp-library v1.6.5
+	github.com/eclipse-xfsc/oid4-vci-authorization-bridge/v2 v2.5.0-oidvci10
+	github.com/eclipse-xfsc/oid4-vci-vp-library v1.7.0-oidvci10
 	github.com/eclipse-xfsc/ssi-jwt/v2 v2.3.1
 	github.com/gin-gonic/gin v1.10.0
 	github.com/google/uuid v1.6.0
@@ -40,7 +40,7 @@ require (
 	github.com/eapache/go-xerial-snappy v0.0.0-20230731223053-c322873962e3 // indirect
 	github.com/eapache/queue v1.1.0 // indirect
 	github.com/eclipse-xfsc/crypto-provider-core v1.4.1 // indirect
-	github.com/eclipse-xfsc/crypto-provider-core/v2 v2.0.0 // indirect
+	github.com/eclipse-xfsc/crypto-provider-core/v2 v2.1.0 // indirect
 	github.com/eclipse-xfsc/crypto-provider-service v1.1.6 // indirect
 	github.com/eclipse-xfsc/did-core/v2 v2.1.0 // indirect
 	github.com/eclipse/paho.golang v0.12.0 // indirect

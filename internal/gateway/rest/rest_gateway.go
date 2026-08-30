@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"net/http"
-	"slices"
+	"strings"
 
 	"github.com/eclipse-xfsc/microservice-core-go/pkg/logr"
 	"github.com/eclipse-xfsc/nats-message-library/common"
@@ -12,227 +12,587 @@ import (
 	"github.com/eclipse-xfsc/oid4-vci-vp-library/model/credential"
 	crypto "github.com/eclipse-xfsc/ssi-jwt/v2"
 	"github.com/gin-gonic/gin"
-	"github.com/lestrrat-go/jwx/v2/jwt"
 )
 
 type RestGateway struct {
 	svc      service.CredentialService
 	log      logr.Logger
 	audience string
-	jwksUrl  string
+	jwksURL  string
 }
 
-func NewGateway(svc service.CredentialService, log logr.Logger, jwksUrl string, audience string) RestGateway {
+func NewGateway(
+	svc service.CredentialService,
+	log logr.Logger,
+	jwksURL string,
+	audience string,
+) RestGateway {
 	return RestGateway{
 		svc:      svc,
 		log:      log,
 		audience: audience,
-		jwksUrl:  jwksUrl,
+		jwksURL:  jwksURL,
 	}
 }
 
 func (g RestGateway) RequestCredential(c *gin.Context) {
-	var token jwt.Token
-	var err error
-
 	tenantID := c.Param("tenantId")
 
 	if tenantID == "" {
-		g.log.Error(errors.ErrUnsupported, "Tenant ID Empty.", nil)
-		c.JSON(400, map[string]string{"error": "Tenant ID Empty"})
+		err := errors.New("tenant ID is empty")
+
+		g.log.Error(err, "tenant ID missing")
+
+		c.JSON(
+			http.StatusBadRequest,
+			credential.ErrInvalidCredentialRequest,
+		)
+
 		return
 	}
 
-	jwksURL := g.jwksUrl // Default
+	//
+	// Resolve runtime configuration.
+	//
+
+	jwksURL := g.jwksURL
 
 	if header := c.GetHeader("x-jwks-url"); header != "" {
 		jwksURL = header
 	}
 
-	audience := g.audience // Default
+	audience := g.audience
 
 	if header := c.GetHeader("x-audience-url"); header != "" {
 		audience = header
 	}
 
-	signerKey := "signerKey" // Default
+	signerKey := "signerKey"
 
 	if header := c.GetHeader("x-signerkey"); header != "" {
 		signerKey = header
-
 	}
 
-	groupId := "" // Default
+	groupID := ""
 
 	if header := c.GetHeader("x-groupId"); header != "" {
-		groupId = header
-
+		groupID = header
 	}
 
-	namespace := "" // Default
+	namespace := ""
+
 	if header := c.GetHeader("x-namespace"); header != "" {
 		namespace = header
-
 	}
 
-	group := "" // Default
+	group := ""
+
 	if header := c.GetHeader("x-group"); header != "" {
 		group = header
-
 	}
 
-	if token, err = crypto.ParseRequestWithJWKS(c.Request, jwksURL); err != nil {
-		g.log.Info("Parameters:", "data", map[string]string{
-			"audience":  audience,
-			"jwks":      jwksURL,
-			"groupId":   groupId,
-			"group":     group,
-			"tenantid":  tenantID,
-			"signerkey": signerKey,
-			"namespace": namespace,
-		})
-		c.AbortWithError(http.StatusUnauthorized, err)
+	//
+	// Verify Access Token signature.
+	//
+
+	token, err := crypto.ParseRequestWithJWKS(
+		c.Request,
+		jwksURL,
+	)
+	if err != nil {
+		g.log.Info(
+			"Parameters:",
+			"data",
+			map[string]string{
+				"audience":  audience,
+				"jwks":      jwksURL,
+				"groupId":   groupID,
+				"group":     group,
+				"tenantid":  tenantID,
+				"signerkey": signerKey,
+				"namespace": namespace,
+			},
+		)
+
+		g.log.Error(
+			err,
+			"access token signature validation failed",
+		)
+
+		c.JSON(
+			http.StatusUnauthorized,
+			gin.H{
+				"error": "invalid_token",
+			},
+		)
+
 		return
 	}
 
-	if err != nil {
-		g.log.Error(err, "token error")
-		c.JSON(401, map[string]string{"error": "unauthorized"})
+	if token == nil {
+		c.JSON(
+			http.StatusUnauthorized,
+			gin.H{
+				"error": "invalid_token",
+			},
+		)
+
 		return
 	}
 
 	subject := token.Subject()
 
 	if subject == "" {
-		g.log.Error(err, "subject error")
-		c.JSON(400, map[string]string{"error": "no subject present"})
+		err := errors.New(
+			"access token contains no subject",
+		)
+
+		g.log.Error(err, "subject validation failed")
+
+		c.JSON(
+			http.StatusUnauthorized,
+			gin.H{
+				"error": "invalid_token",
+			},
+		)
+
 		return
 	}
+
+	//
+	// Decode Credential Request.
+	//
 
 	var req credential.CredentialRequest
-	if err := json.NewDecoder(c.Request.Body).Decode(&req); err != nil {
-		g.log.Error(errors.New("decoding error"), "decoding error")
-		c.JSON(400, credential.ErrInvalidCredentialRequest)
+
+	decoder := json.NewDecoder(c.Request.Body)
+	decoder.DisallowUnknownFields()
+
+	if err := decoder.Decode(&req); err != nil {
+		g.log.Error(
+			err,
+			"could not decode credential request",
+		)
+
+		c.JSON(
+			http.StatusBadRequest,
+			credential.ErrInvalidCredentialRequest,
+		)
+
 		return
 	}
 
-	if req.Format != "" && req.CredentialIdentifier != "" && req.CredentialConfigurationId != "" {
-		g.log.Error(errors.New("unclear parameters"), "Either format or credential identifier or credential configuration id can be used")
-		c.JSON(400, credential.ErrUnsupportedCredentialFormat)
+	//
+	// Exactly one of:
+	//
+	//   credential_identifier
+	//   credential_configuration_id
+	//
+	// must be present.
+	//
+
+	hasCredentialIdentifier :=
+		req.CredentialIdentifier != ""
+
+	hasCredentialConfigurationID :=
+		req.CredentialConfigurationID != ""
+
+	if hasCredentialIdentifier == hasCredentialConfigurationID {
+		err := errors.New(
+			"exactly one of credential_identifier or credential_configuration_id must be present",
+		)
+
+		g.log.Error(
+			err,
+			"invalid credential request",
+		)
+
+		c.JSON(
+			http.StatusBadRequest,
+			credential.ErrInvalidCredentialRequest,
+		)
+
 		return
 	}
 
-	if req.CredentialConfigurationId == "" && req.Format == "" && req.CredentialIdentifier == "" {
-		g.log.Error(errors.New("missing credential configuration or format"), "missing credential identifier, credentialconfiguration or format")
-		c.JSON(400, credential.ErrUnsupportedCredentialFormat)
-		return
-	}
+	//
+	// Validate Access Token against authorization bridge state.
+	//
 
-	authRep, err := g.svc.VerifyAuthToken(c.Request.Context(), tenantID, groupId, c.Request.Header.Get("Authorization"))
-
+	authRep, err := g.svc.VerifyAuthToken(
+		c.Request.Context(),
+		tenantID,
+		groupID,
+		c.Request.Header.Get("Authorization"),
+	)
 	if err != nil {
-		g.log.Error(err, err.Error())
-		c.JSON(401, map[string]string{"error": "unauthorized"})
+		g.log.Error(
+			err,
+			"access token validation failed",
+		)
+
+		c.JSON(
+			http.StatusUnauthorized,
+			gin.H{
+				"error": "invalid_token",
+			},
+		)
+
 		return
 	}
+
+	if authRep == nil {
+		c.JSON(
+			http.StatusUnauthorized,
+			gin.H{
+				"error": "invalid_token",
+			},
+		)
+
+		return
+	}
+
+	//
+	// Tenant binding.
+	//
 
 	if authRep.TenantId != tenantID {
-		g.log.Error(err, "mismatch in tenant id route and auth token usage")
-		c.JSON(401, credential.ErrInvalidCredentialRequest)
+		err := errors.New(
+			"tenant ID does not match access token",
+		)
+
+		g.log.Error(
+			err,
+			"tenant mismatch",
+		)
+
+		c.JSON(
+			http.StatusUnauthorized,
+			gin.H{
+				"error": "invalid_token",
+			},
+		)
+
 		return
 	}
 
-	tmpReq := common.Request{
+	//
+	// Subject binding.
+	//
+
+	tokenRequest := common.Request{
 		TenantId:  authRep.TenantId,
 		RequestId: authRep.RequestId,
 		GroupId:   authRep.GroupId,
 	}
 
-	if tmpReq.BuildSubject() != subject {
-		g.log.Error(err, "mismatch in subject")
-		c.JSON(400, credential.ErrInvalidCredentialRequest)
+	if tokenRequest.BuildSubject() != subject {
+		err := errors.New(
+			"access token subject does not match request context",
+		)
+
+		g.log.Error(
+			err,
+			"subject mismatch",
+		)
+
+		c.JSON(
+			http.StatusUnauthorized,
+			gin.H{
+				"error": "invalid_token",
+			},
+		)
+
 		return
 	}
 
-	metadata, err := g.svc.GetCompleteCredentialIssuer(c.Request.Context(), tenantID)
+	//
+	// Load issuer metadata.
+	//
 
-	if err != nil || metadata == nil {
-		g.log.Error(err, err.Error())
-		c.JSON(400, map[string]string{
-			"error": "error during getting metadata",
-		})
+	metadata, err := g.svc.GetCompleteCredentialIssuer(
+		c.Request.Context(),
+		tenantID,
+	)
+	if err != nil {
+		g.log.Error(
+			err,
+			"could not load credential issuer metadata",
+		)
+
+		c.JSON(
+			http.StatusInternalServerError,
+			gin.H{
+				"error": "server_error",
+			},
+		)
+
 		return
 	}
 
-	if req.Format != "" {
-		var credentialConfig credential.CredentialConfiguration
-		var ok = false
-		if metadata != nil {
-			for i, c := range metadata.CredentialConfigurationsSupported {
-				if c.Format == req.Format {
-					credentialConfig = c
-					req.CredentialConfigurationId = i
-					ok = true
-					break
-				}
-			}
+	if metadata == nil {
+		err := errors.New(
+			"credential issuer metadata is nil",
+		)
+
+		g.log.Error(
+			err,
+			"could not load credential issuer metadata",
+		)
+
+		c.JSON(
+			http.StatusInternalServerError,
+			gin.H{
+				"error": "server_error",
+			},
+		)
+
+		return
+	}
+
+	//
+	// Resolve Credential Configuration.
+	//
+
+	credentialConfigurationID, err :=
+		resolveCredentialConfigurationID(
+			req,
+			authRep.CredentialConfigurations,
+		)
+
+	if err != nil {
+		g.log.Error(
+			err,
+			"could not resolve credential configuration",
+		)
+
+		if req.CredentialIdentifier != "" {
+			c.JSON(
+				http.StatusBadRequest,
+				credential.ErrUnknownCredentialIdentifier,
+			)
+		} else {
+			c.JSON(
+				http.StatusBadRequest,
+				credential.ErrUnknownCredentialConfiguration,
+			)
 		}
 
-		if len(credentialConfig.ProofTypesSupported) > 0 {
-			if req.Proof == nil {
-				g.log.Error(err, "proof missing")
-				c.JSON(400, credential.ErrInvalidProof)
-				return
-			}
+		return
+	}
 
-			err := req.Proof.CheckProof(audience, authRep.Nonce, credentialConfig.ProofTypesSupported)
+	credentialConfiguration, ok :=
+		metadata.CredentialConfigurationsSupported[credentialConfigurationID]
 
-			if err != nil {
-				g.log.Error(err, "proof invalid")
-				c.JSON(400, credential.ErrInvalidProof)
-				return
-			}
+	if !ok {
+		err := errors.New(
+			"credential configuration is not supported",
+		)
+
+		g.log.Error(
+			err,
+			"unknown credential configuration",
+		)
+
+		c.JSON(
+			http.StatusBadRequest,
+			credential.ErrUnknownCredentialConfiguration,
+		)
+
+		return
+	}
+
+	//
+	// Validate proof(s).
+	//
+	// Nonce is optional.
+	//
+	// authRep.Nonce == "" means nonce validation is disabled.
+	//
+
+	valid, err := req.CheckRequestValid(
+		audience,
+		authRep.Nonce,
+		credentialConfiguration.ProofTypesSupported,
+	)
+	if err != nil || !valid {
+		if err != nil {
+			g.log.Error(
+				err,
+				"credential request proof validation failed",
+			)
 		}
 
-		if err != nil || metadata == nil || !ok {
-			g.log.Error(errors.New("unsupported format or identifier"), "unsupported format or identifier")
-			if err != nil {
-				g.log.Error(err, err.Error())
-			}
-			c.JSON(400, credential.ErrUnsupportedCredentialFormat)
+		//
+		// Separate invalid nonce from general invalid proof.
+		//
+		// With the current library API the error is still textual,
+		// therefore this is only temporary until typed errors are used.
+		//
+		if err != nil &&
+			strings.Contains(
+				strings.ToLower(err.Error()),
+				"nonce",
+			) {
+
+			c.JSON(
+				http.StatusBadRequest,
+				credential.ErrInvalidNonce,
+			)
+
 			return
 		}
-	} else {
-		if req.CredentialIdentifier != "" {
-			//when just credential identifier is sent, find out the config id (stupid spec)
-			for _, c := range authRep.CredentialConfigurations {
-				if slices.Contains(c.CredentialIdentifier, req.CredentialIdentifier) {
-					req.CredentialConfigurationId = c.Id
-					break
+
+		c.JSON(
+			http.StatusBadRequest,
+			credential.ErrInvalidProof,
+		)
+
+		return
+	}
+
+	//
+	// Extract issuer-internal code from access token.
+	//
+
+	codeValue, ok := token.Get("code")
+	if !ok {
+		err := errors.New(
+			"access token contains no code claim",
+		)
+
+		g.log.Error(
+			err,
+			"missing code claim",
+		)
+
+		c.JSON(
+			http.StatusUnauthorized,
+			gin.H{
+				"error": "invalid_token",
+			},
+		)
+
+		return
+	}
+
+	code, ok := codeValue.(string)
+
+	if !ok || code == "" {
+		err := errors.New(
+			"access token code claim is invalid",
+		)
+
+		g.log.Error(
+			err,
+			"invalid code claim",
+		)
+
+		c.JSON(
+			http.StatusUnauthorized,
+			gin.H{
+				"error": "invalid_token",
+			},
+		)
+
+		return
+	}
+
+	//
+	// Issue Credential.
+	//
+
+	cred, err := g.svc.GetCredential(
+		c.Request.Context(),
+		authRep,
+		req,
+		code,
+		audience,
+		signerKey,
+		namespace,
+		group,
+	)
+	if err != nil {
+		g.log.Error(
+			err,
+			"error during credential issuance",
+		)
+
+		switch {
+		case errors.Is(
+			err,
+			credential.ErrUnknownCredentialIdentifier,
+		):
+			c.JSON(
+				http.StatusBadRequest,
+				credential.ErrUnknownCredentialIdentifier,
+			)
+
+		case errors.Is(
+			err,
+			credential.ErrUnknownCredentialConfiguration,
+		):
+			c.JSON(
+				http.StatusBadRequest,
+				credential.ErrUnknownCredentialConfiguration,
+			)
+
+		default:
+			c.JSON(
+				http.StatusBadRequest,
+				credential.ErrInvalidCredentialRequest,
+			)
+		}
+
+		return
+	}
+
+	c.JSON(
+		http.StatusOK,
+		cred,
+	)
+}
+
+func resolveCredentialConfigurationID(
+	req credential.CredentialRequest,
+	authorizedConfigurations []credential.CredentialConfigurationIdentifier,
+) (string, error) {
+
+	//
+	// Flow 1:
+	// credential_configuration_id was sent directly.
+	//
+
+	if req.CredentialConfigurationID != "" {
+		for _, configuration := range authorizedConfigurations {
+			if configuration.Id == req.CredentialConfigurationID {
+				return configuration.Id, nil
+			}
+		}
+
+		return "",
+			credential.ErrUnknownCredentialConfiguration
+	}
+
+	//
+	// Flow 2:
+	// credential_identifier was returned during token issuance
+	// and now has to be mapped back to its configuration.
+	//
+
+	if req.CredentialIdentifier != "" {
+		for _, configuration := range authorizedConfigurations {
+			for _, identifier := range configuration.CredentialIdentifiers {
+				if identifier == req.CredentialIdentifier {
+					return configuration.Id, nil
 				}
 			}
 		}
+
+		return "",
+			credential.ErrUnknownCredentialIdentifier
 	}
 
-	code, ok := token.Get("code")
-
-	if !ok {
-		code = "no code provided in token"
-	}
-
-	cc, ok := code.(string)
-
-	if !ok {
-		c.JSON(400, credential.ErrInvalidCredentialRequest)
-		return
-	}
-
-	cred, err := g.svc.GetCredential(c, authRep, req, cc, audience, signerKey, namespace, group)
-	if err != nil {
-		g.log.Error(err, "Error during Get Credential")
-		c.JSON(400, credential.ErrInvalidCredentialRequest)
-		return
-	}
-
-	c.JSON(http.StatusOK, cred)
+	return "",
+		credential.ErrInvalidCredentialRequest
 }
