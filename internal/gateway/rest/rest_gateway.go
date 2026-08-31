@@ -15,10 +15,11 @@ import (
 )
 
 type RestGateway struct {
-	svc      service.CredentialService
-	log      logr.Logger
-	audience string
-	jwksURL  string
+	svc         service.CredentialService
+	log         logr.Logger
+	audience    string
+	jwksURL     string
+	nonceSecret string
 }
 
 func NewGateway(
@@ -26,12 +27,14 @@ func NewGateway(
 	log logr.Logger,
 	jwksURL string,
 	audience string,
+	nonceSecret string,
 ) RestGateway {
 	return RestGateway{
-		svc:      svc,
-		log:      log,
-		audience: audience,
-		jwksURL:  jwksURL,
+		svc:         svc,
+		log:         log,
+		audience:    audience,
+		jwksURL:     jwksURL,
+		nonceSecret: nonceSecret,
 	}
 }
 
@@ -147,7 +150,10 @@ func (g RestGateway) RequestCredential(c *gin.Context) {
 			"access token contains no subject",
 		)
 
-		g.log.Error(err, "subject validation failed")
+		g.log.Error(
+			err,
+			"subject validation failed",
+		)
 
 		c.JSON(
 			http.StatusUnauthorized,
@@ -366,7 +372,10 @@ func (g RestGateway) RequestCredential(c *gin.Context) {
 			"could not resolve credential configuration",
 		)
 
-		if req.CredentialIdentifier != "" {
+		if errors.Is(
+			err,
+			credential.ErrUnknownCredentialIdentifier,
+		) {
 			c.JSON(
 				http.StatusBadRequest,
 				credential.ErrUnknownCredentialIdentifier,
@@ -403,31 +412,34 @@ func (g RestGateway) RequestCredential(c *gin.Context) {
 	}
 
 	//
-	// Validate proof(s).
+	// Validate request and proof(s).
 	//
-	// Nonce is optional.
+	// If nonceSecret is configured, the library requires a nonce
+	// and validates:
 	//
-	// authRep.Nonce == "" means nonce validation is disabled.
+	//   - HMAC
+	//   - expiration
+	//   - tenant binding
 	//
 
 	valid, err := req.CheckRequestValid(
 		audience,
-		authRep.Nonce,
+		tenantID,
+		g.nonceSecret,
 		credentialConfiguration.ProofTypesSupported,
 	)
+
 	if err != nil || !valid {
 		if err != nil {
 			g.log.Error(
 				err,
-				"credential request proof validation failed",
+				"credential request validation failed",
 			)
 		}
 
 		//
-		// Separate invalid nonce from general invalid proof.
-		//
-		// With the current library API the error is still textual,
-		// therefore this is only temporary until typed errors are used.
+		// TODO:
+		// Replace textual inspection with typed library errors.
 		//
 		if err != nil &&
 			strings.Contains(
@@ -456,6 +468,7 @@ func (g RestGateway) RequestCredential(c *gin.Context) {
 	//
 
 	codeValue, ok := token.Get("code")
+
 	if !ok {
 		err := errors.New(
 			"access token contains no code claim",
@@ -512,6 +525,7 @@ func (g RestGateway) RequestCredential(c *gin.Context) {
 		namespace,
 		group,
 	)
+
 	if err != nil {
 		g.log.Error(
 			err,
@@ -553,6 +567,58 @@ func (g RestGateway) RequestCredential(c *gin.Context) {
 	)
 }
 
+type nonceResponse struct {
+	CNonce string `json:"c_nonce"`
+}
+
+func (g RestGateway) RequestNonce(c *gin.Context) {
+	tenantID := c.Param("tenantId")
+
+	if tenantID == "" {
+		g.log.Error(
+			errors.New("tenant ID is empty"),
+			"could not create nonce",
+		)
+
+		c.JSON(
+			http.StatusBadRequest,
+			gin.H{
+				"error": "invalid_request",
+			},
+		)
+
+		return
+	}
+
+	nonce, err := credential.CreateNonce(
+		g.nonceSecret,
+		tenantID,
+		credential.DefaultNonceTTL,
+	)
+	if err != nil {
+		g.log.Error(
+			err,
+			"could not create nonce",
+		)
+
+		c.JSON(
+			http.StatusInternalServerError,
+			gin.H{
+				"error": "server_error",
+			},
+		)
+
+		return
+	}
+
+	c.JSON(
+		http.StatusOK,
+		nonceResponse{
+			CNonce: nonce,
+		},
+	)
+}
+
 func resolveCredentialConfigurationID(
 	req credential.CredentialRequest,
 	authorizedConfigurations []credential.CredentialConfigurationIdentifier,
@@ -583,6 +649,7 @@ func resolveCredentialConfigurationID(
 	if req.CredentialIdentifier != "" {
 		for _, configuration := range authorizedConfigurations {
 			for _, identifier := range configuration.CredentialIdentifiers {
+
 				if identifier == req.CredentialIdentifier {
 					return configuration.Id, nil
 				}

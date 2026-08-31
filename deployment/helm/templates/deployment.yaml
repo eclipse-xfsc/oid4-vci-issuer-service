@@ -65,6 +65,12 @@ spec:
             - name: ISSUANCE_LISTEN_PORT
               value: {{ .Values.server.http.port | quote }}
 
+            - name: ISSUANCE_NONCE_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Chart.Name }}-nonce-secret
+                  key: nonce-secret
+
           {{- with .Values.resources }}
           resources:
             {{- toYaml . | nindent 12 }}

@@ -7,6 +7,9 @@ github.com/IBM/sarama v1.43.2 h1:HABeEqRUh32z8yzY2hGB/j8mHSzC/HA9zlEjqFNCzSw=
 github.com/IBM/sarama v1.43.2/go.mod h1:Kyo4WkF24Z+1nz7xeVUFWIuKVV8RS3wM8mkvPKMdXFQ=
 github.com/KyleBanks/depth v1.2.1 h1:5h8fQADFrWtarTdtDudMmGsC7GPbOAu6RVB3ffsVFHc=
 github.com/KyleBanks/depth v1.2.1/go.mod h1:jzSb9d0L43HxTQfT+oSA1EEp2q+ne2uh6XgeJcm8brE=
+github.com/MichaelFraser99/go-jose v0.9.0 h1:7vUcuJs5vGP0F+AQDStv6puqMYMmx75B4/Qc2CeKQR8=
+github.com/MichaelFraser99/go-jose v0.9.0/go.mod h1:kdRvg7/FPcDnsEz8PyCg5hhcBlLud9F0jB4Xy/u771c=
+github.com/MichaelFraser99/go-sd-jwt v1.3.0 h1:mA5O3WUQr/z/gxhg/ZFhOal16WFZQsZQzpqZPo3GhJk=
 github.com/MichaelFraser99/go-sd-jwt v1.3.0/go.mod h1:8fJLAvzyDHD/gxnW3o6u1jW1TPJTfLFTGJc3oLsrtLw=
 github.com/PuerkitoBio/purell v1.1.1/go.mod h1:c11w/QuzBsJSee3cPx9rAFu61PvFxuPbtSwDGJws/X0=
 github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578/go.mod h1:uGdkoq3SwY9Y+13GIhn11/XLaGBb4BfwItxLd5jeuXE=
@@ -118,6 +121,10 @@ github.com/eclipse-xfsc/oid4-vci-vp-library v1.6.5 h1:MpOhZo7rXOIUTmXBYg2JYL4Qko
 github.com/eclipse-xfsc/oid4-vci-vp-library v1.6.5/go.mod h1:0SLW2+MoLNnK0XaUGJlWxrzQbkWVDLHwxKALqm3LPCk=
 github.com/eclipse-xfsc/oid4-vci-vp-library v1.7.0-oidvci10 h1:WFtmznee22RT3IpHUxNJOpoB0eg+9H6+c3xmP3nIy3M=
 github.com/eclipse-xfsc/oid4-vci-vp-library v1.7.0-oidvci10/go.mod h1:z3IaBHrKd+ku3eDMDSMSpWLsLNJY/Qn1kZgZE88uC60=
+github.com/eclipse-xfsc/oid4-vci-vp-library v1.7.1-oidvci10 h1:KW4ODufnCCmJ5M09w4n7Txa3GDEMAcgKCveaeDXPs6Y=
+github.com/eclipse-xfsc/oid4-vci-vp-library v1.7.1-oidvci10/go.mod h1:z3IaBHrKd+ku3eDMDSMSpWLsLNJY/Qn1kZgZE88uC60=
+github.com/eclipse-xfsc/oid4-vci-vp-library v1.7.2-oidvci10 h1:d3crgl2cgTJEVKbx7b5ylumoyochrrmKHe7h3uegZCc=
+github.com/eclipse-xfsc/oid4-vci-vp-library v1.7.2-oidvci10/go.mod h1:z3IaBHrKd+ku3eDMDSMSpWLsLNJY/Qn1kZgZE88uC60=
 github.com/eclipse-xfsc/ssi-jwt v1.2.1 h1:LQRhJ3Uw7sHmMS51RGHPsgUDbQkKO1NAPlB53VldcnQ=
 github.com/eclipse-xfsc/ssi-jwt v1.2.1/go.mod h1:sYdF2Y0BYEjui8QD++K0kti+8N0riH+aTlf+ynjmQFw=
 github.com/eclipse-xfsc/ssi-jwt/v2 v2.0.2 h1:1bqoAS/ReyEW0LCxPyjwCAjov4FdbrjzwyFFYJALnXY=
@@ -379,6 +386,7 @@ github.com/spiffe/go-spiffe/v2 v2.6.0/go.mod h1:gm2SeUoMZEtpnzPNs2Csc0D/gX33k1xI
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/objx v0.4.0/go.mod h1:YvHI0jy2hoMjB+UWwv71VJQ9isScKT/TqJzVSSt89Yw=
 github.com/stretchr/objx v0.5.0/go.mod h1:Yh+to48EsGEfYuaHDzXPcE3xhTkx73EhmCGUpEOglKo=
+github.com/stretchr/objx v0.5.2/go.mod h1:FRsXN1f5AsAjCGJKqEizvkpNtU+EGNCLh3NxZ/8L+MA=
 github.com/stretchr/testify v1.3.0/go.mod h1:M5WIy9Dh21IEIfnGCwXGc5bZfKNJtfHm1UVUgZn+9EI=
 github.com/stretchr/testify v1.4.0/go.mod h1:j7eGeouHqKxXV5pUuKE4zz7dFj8WfuZ+81PSLYec5m4=
 github.com/stretchr/testify v1.6.1/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
@@ -388,6 +396,7 @@ github.com/stretchr/testify v1.8.0/go.mod h1:yNjHg4UonilssWZ8iaSj1OCr/vHnekPRkoO
 github.com/stretchr/testify v1.8.1/go.mod h1:w2LPCIKwWwSfY2zedu0+kehJoqGctiVI29o6fzry7u4=
 github.com/stretchr/testify v1.10.0 h1:Xv5erBjTwe/5IxqUQTdXv5kgmIvbHo3QQyRwhJsOfJA=
 github.com/stretchr/testify v1.10.0/go.mod h1:r2ic/lqez/lEtzL7wO/rwa5dbSLXVDPFyf8C91i36aY=
+github.com/stretchr/testify v1.11.1 h1:7s2iGBzp5EwR7/aIZr8ao5+dra3wiQyKjjFuvgVKu7U=
 github.com/stretchr/testify v1.11.1/go.mod h1:wZwfW3scLgRK+23gO65QZefKpKQRnfz6sD981Nm4B6U=
 github.com/subosito/gotenv v1.6.0 h1:9NlTDc1FTs4qu0DDq7AEtTPNw6SVm7uBMsUCUjABIf8=
 github.com/subosito/gotenv v1.6.0/go.mod h1:Dk4QP5c2W3ibzajGcXpNraDfq2IrhjMIvMSWPKKo0FU=

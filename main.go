@@ -72,6 +72,7 @@ func main() {
 
 	srv := server.New(common.GetEnvironment())
 	srv.AddHandler(http.MethodPost, "/credential", restGW.RequestCredential)
+	srv.AddHandler(http.MethodPost, "/nonce", restGW.RequestNonce)
 
 	logger.Info("starting rest gateway...")
 
