@@ -60,7 +60,7 @@ func (g RestGateway) RequestCredential(c *gin.Context) {
 
 	jwksURL := g.jwksURL
 
-	if header := c.GetHeader("x-jwks-url-verify"); header != "" {
+	if header := c.GetHeader("x-jwks-url"); header != "" {
 		jwksURL = header
 	}
 
