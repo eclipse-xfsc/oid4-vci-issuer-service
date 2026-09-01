@@ -421,11 +421,15 @@ func (g RestGateway) RequestCredential(c *gin.Context) {
 	//   - expiration
 	//   - tenant binding
 	//
+	nonce := ""
+	if metadata.NonceEndpoint != nil {
+		nonce = g.nonceSecret
+	}
 
 	valid, err := req.CheckRequestValid(
 		audience,
 		tenantID,
-		g.nonceSecret,
+		nonce,
 		credentialConfiguration.ProofTypesSupported,
 	)
 
