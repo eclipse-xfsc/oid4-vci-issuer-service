@@ -358,17 +358,7 @@ func (s CredentialService) GetCredential(
 	}
 
 	if credentialReplyEvent == nil {
-		return &types.GetCredentialRespImmediate{
-			Reply: common.Reply{
-				TenantId:  authRep.TenantId,
-				RequestId: uuid.NewString(),
-
-				Error: &common.Error{
-					Status: 500,
-					Msg:    "No credential reply",
-				},
-			},
-		}, nil
+		return nil, errors.New("No credential reply")
 	}
 
 	s.log.Info(
@@ -405,13 +395,11 @@ func (s CredentialService) GetCredential(
 	}
 
 	return &types.GetCredentialRespImmediate{
-		Reply: common.Reply{
-			TenantId:  authRep.TenantId,
-			RequestId: authRep.RequestId,
-			GroupId:   authRep.GroupId,
+		Credentials: []types.CredentialResponseItem{
+			types.CredentialResponseItem{
+				Credential: credentialReply.Credential,
+			},
 		},
-
-		Credential: credentialReply.Credential,
 	}, nil
 }
 

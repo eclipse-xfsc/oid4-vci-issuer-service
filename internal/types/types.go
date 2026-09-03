@@ -1,7 +1,5 @@
 package types
 
-import "github.com/eclipse-xfsc/nats-message-library/common"
-
 const (
 	ProofTypeJWT   = "jwt"
 	ProofTypeCWT   = "cwt"
@@ -12,26 +10,21 @@ type GetCredentialResp interface {
 	isGetCredentialResp()
 }
 
-type GetCredentialRespImmediate struct {
-	common.Reply
-	Format     string `json:"format"`
-	Credential any    `json:"credential"`
-	CNonce     string `json:"c_nonce"`
-
-	// CNonceExpiresIn is the lifetime in seconds
-	// of the c_nonce
-	CNonceExpiresIn int `json:"c_nonce_expires_in"`
+type CredentialResponseItem struct {
+	Credential any `json:"credential"`
 }
 
-func (g GetCredentialRespImmediate) isGetCredentialResp() {}
+type GetCredentialRespImmediate struct {
+	Credentials []CredentialResponseItem `json:"credentials"`
+
+	NotificationID string `json:"notification_id,omitempty"`
+}
 
 type GetCredentialRespDeferred struct {
 	TransactionID string `json:"transaction_id"`
-	CNonce        string `json:"c_nonce"`
-
-	// CNonceExpiresIn is the lifetime in seconds
-	// of the c_nonce
-	CNonceExpiresIn int `json:"c_nonce_expires_in"`
+	Interval      int    `json:"interval"`
 }
+
+func (g GetCredentialRespImmediate) isGetCredentialResp() {}
 
 func (g GetCredentialRespDeferred) isGetCredentialResp() {}
