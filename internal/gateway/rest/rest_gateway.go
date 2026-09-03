@@ -426,6 +426,11 @@ func (g RestGateway) RequestCredential(c *gin.Context) {
 		nonce = g.nonceSecret
 	}
 
+	g.log.Info(
+		"credential proof received",
+		"proof", req.Proofs.JWT[0],
+	)
+
 	valid, err := req.CheckRequestValid(
 		audience,
 		tenantID,
@@ -565,8 +570,11 @@ func (g RestGateway) RequestCredential(c *gin.Context) {
 		return
 	}
 
-	g.log.Info("Credential issued: ", cred)
+	g.log.Info(
 
+		"Credential issued",
+		"credential", cred,
+	)
 	c.JSON(
 		http.StatusOK,
 		cred,
