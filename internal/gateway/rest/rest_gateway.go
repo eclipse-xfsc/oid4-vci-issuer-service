@@ -565,8 +565,6 @@ func (g RestGateway) RequestCredential(c *gin.Context) {
 		return
 	}
 
-	g.log.Info("Credential issued: ", cred)
-
 	c.JSON(
 		http.StatusOK,
 		cred,
