@@ -8,14 +8,13 @@ import (
 
 	"github.com/eclipse-xfsc/microservice-core-go/pkg/logr"
 	"github.com/eclipse-xfsc/nats-message-library/common"
-	"github.com/eclipse-xfsc/oid4-vci-issuer-service/internal/service"
 	"github.com/eclipse-xfsc/oid4-vci-vp-library/model/credential"
 	crypto "github.com/eclipse-xfsc/ssi-jwt/v2"
 	"github.com/gin-gonic/gin"
 )
 
 type RestGateway struct {
-	svc         service.CredentialService
+	svc         credentialService
 	log         logr.Logger
 	audience    string
 	jwksURL     string
@@ -23,7 +22,7 @@ type RestGateway struct {
 }
 
 func NewGateway(
-	svc service.CredentialService,
+	svc credentialService,
 	log logr.Logger,
 	jwksURL string,
 	audience string,
@@ -186,6 +185,35 @@ func (g RestGateway) RequestCredential(c *gin.Context) {
 		)
 
 		return
+	}
+
+	//
+	// Normalize legacy / interoperability request variants.
+	//
+	// Example:
+	//
+	//   "proof": {
+	//     "proof_type": "jwt",
+	//     "jwt": "..."
+	//   }
+	//
+	// becomes:
+	//
+	//   "proofs": {
+	//     "jwt": ["..."]
+	//   }
+	//
+	// The legacy "format" field is accepted by the request model but is
+	// intentionally not used for credential selection.
+	//
+
+	req.Normalize()
+
+	if req.Format != "" {
+		g.log.Info(
+			"legacy credential request format received",
+			"format", req.Format,
+		)
 	}
 
 	//
@@ -421,15 +449,43 @@ func (g RestGateway) RequestCredential(c *gin.Context) {
 	//   - expiration
 	//   - tenant binding
 	//
+
 	nonce := ""
+
 	if metadata.NonceEndpoint != nil {
 		nonce = g.nonceSecret
 	}
 
-	g.log.Info(
-		"credential proof received",
-		"proof", req.Proofs.JWT[0],
-	)
+	//
+	// Do not dereference req.Proofs.JWT[0] without checking it first.
+	// A supported configuration may use a different proof type, or the
+	// request may simply be malformed.
+	//
+
+	switch {
+	case req.Proofs == nil:
+		g.log.Info(
+			"credential request contains no proofs",
+		)
+
+	case len(req.Proofs.JWT) > 0:
+		g.log.Info(
+			"credential JWT proof received",
+			"proof", req.Proofs.JWT[0],
+		)
+
+	case len(req.Proofs.DIVP) > 0:
+		g.log.Info(
+			"credential di_vp proof received",
+			"count", len(req.Proofs.DIVP),
+		)
+
+	case len(req.Proofs.Attestation) > 0:
+		g.log.Info(
+			"credential attestation proof received",
+			"count", len(req.Proofs.Attestation),
+		)
+	}
 
 	valid, err := req.CheckRequestValid(
 		audience,
@@ -450,6 +506,7 @@ func (g RestGateway) RequestCredential(c *gin.Context) {
 		// TODO:
 		// Replace textual inspection with typed library errors.
 		//
+
 		if err != nil &&
 			strings.Contains(
 				strings.ToLower(err.Error()),
@@ -571,10 +628,10 @@ func (g RestGateway) RequestCredential(c *gin.Context) {
 	}
 
 	g.log.Info(
-
 		"Credential issued",
 		"credential", cred,
 	)
+
 	c.JSON(
 		http.StatusOK,
 		cred,
