@@ -440,6 +440,47 @@ func (g RestGateway) RequestCredential(c *gin.Context) {
 	}
 
 	//
+	// Validate interoperability vct hint.
+	//
+	// Some wallets send "vct" in the Credential Request even though
+	// credential selection is done via credential_configuration_id or
+	// credential_identifier.
+	//
+	// Therefore:
+	//   - never use req.VCT for configuration selection
+	//   - if present, validate it against the resolved configuration
+	//
+
+	if req.VCT != "" {
+		if *credentialConfiguration.Vct == "" {
+			g.log.Info(
+				"credential request contains vct but resolved configuration has no vct",
+				"request_vct", req.VCT,
+				"credential_configuration_id", credentialConfigurationID,
+			)
+		} else if req.VCT != *credentialConfiguration.Vct {
+			err := errors.New(
+				"credential request vct does not match resolved credential configuration",
+			)
+
+			g.log.Error(
+				err,
+				"credential vct mismatch",
+				"request_vct", req.VCT,
+				"configuration_vct", credentialConfiguration.Vct,
+				"credential_configuration_id", credentialConfigurationID,
+			)
+
+			c.JSON(
+				http.StatusBadRequest,
+				credential.ErrInvalidCredentialRequest,
+			)
+
+			return
+		}
+	}
+
+	//
 	// Validate request and proof(s).
 	//
 	// If nonceSecret is configured, the library requires a nonce

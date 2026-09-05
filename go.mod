@@ -8,7 +8,7 @@ require (
 	github.com/eclipse-xfsc/microservice-core-go v1.1.2
 	github.com/eclipse-xfsc/nats-message-library v1.5.0-oidvci10
 	github.com/eclipse-xfsc/oid4-vci-authorization-bridge/v2 v2.5.0-oidvci10
-	github.com/eclipse-xfsc/oid4-vci-vp-library v1.8.0-oidvci10
+	github.com/eclipse-xfsc/oid4-vci-vp-library v1.8.1-oidvci10
 	github.com/eclipse-xfsc/ssi-jwt/v2 v2.3.1
 	github.com/gin-gonic/gin v1.10.0
 	github.com/google/uuid v1.6.0
