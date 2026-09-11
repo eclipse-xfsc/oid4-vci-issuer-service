@@ -68,10 +68,11 @@ func main() {
 		return natsGW.Listen(ctx)
 	})
 
-	restGW := rest.NewGateway(credentialService, *logger, conf.JwksUrl, conf.Audience)
+	restGW := rest.NewGateway(credentialService, *logger, conf.JwksUrl, conf.Audience, conf.NonceSecret)
 
 	srv := server.New(common.GetEnvironment())
 	srv.AddHandler(http.MethodPost, "/credential", restGW.RequestCredential)
+	srv.AddHandler(http.MethodPost, "/nonce", restGW.RequestNonce)
 
 	logger.Info("starting rest gateway...")
 
