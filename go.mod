@@ -7,7 +7,7 @@ require (
 	github.com/eclipse-xfsc/cloud-event-provider v0.1.5
 	github.com/eclipse-xfsc/microservice-core-go v1.1.2
 	github.com/eclipse-xfsc/nats-message-library v1.5.0
-	github.com/eclipse-xfsc/oid4-vci-authorization-bridge/v2 v2.5.6
+	github.com/eclipse-xfsc/oid4-vci-authorization-bridge/v2 v2.5.7
 	github.com/eclipse-xfsc/oid4-vci-vp-library v1.8.1
 	github.com/eclipse-xfsc/ssi-jwt/v2 v2.3.1
 	github.com/gin-gonic/gin v1.12.0
@@ -20,7 +20,7 @@ require (
 )
 
 require (
-	github.com/Azure/go-amqp v1.7.0 // indirect
+	github.com/Azure/go-amqp v0.17.0 // indirect
 	github.com/IBM/sarama v1.60.2 // indirect
 	github.com/KyleBanks/depth v1.2.1 // indirect
 	github.com/MichaelFraser99/go-jose v0.9.0 // indirect
@@ -30,7 +30,7 @@ require (
 	github.com/bytedance/sonic/loader v0.5.2 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/clipperhouse/uax29/v2 v2.2.0 // indirect
-	github.com/cloudevents/sdk-go/protocol/amqp/v2 v2.16.2 // indirect
+	github.com/cloudevents/sdk-go/protocol/amqp/v2 v2.15.2 // indirect
 	github.com/cloudevents/sdk-go/protocol/kafka_sarama/v2 v2.16.2 // indirect
 	github.com/cloudevents/sdk-go/protocol/mqtt_paho/v2 v2.0.0-20260907034638-0d89252a1fa0 // indirect
 	github.com/cloudevents/sdk-go/protocol/nats/v2 v2.16.2 // indirect
@@ -81,6 +81,8 @@ require (
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/compress v1.20.0 // indirect
 	github.com/klauspost/cpuid/v2 v2.4.0 // indirect
+	github.com/kr/pretty v0.3.1 // indirect
+	github.com/kr/text v0.2.0 // indirect
 	github.com/leodido/go-urn v1.5.0 // indirect
 	github.com/lestrrat-go/blackmagic v1.0.4 // indirect
 	github.com/lestrrat-go/httpcc v1.0.1 // indirect
@@ -105,6 +107,7 @@ require (
 	github.com/quic-go/quic-go v0.59.0 // indirect
 	github.com/rcrowley/go-metrics v0.0.0-20250401214520-65e299d6c5c9 // indirect
 	github.com/redis/go-redis/v9 v9.22.0 // indirect
+	github.com/rogpeppe/go-internal v1.11.0 // indirect
 	github.com/sagikazarmark/locafero v0.12.0 // indirect
 	github.com/segmentio/asm v1.2.1 // indirect
 	github.com/sethvargo/go-retry v0.4.0 // indirect
@@ -136,5 +139,6 @@ require (
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20260908043556-f8649ddbbfe6 // indirect
 	google.golang.org/grpc v1.83.2 // indirect
 	google.golang.org/protobuf v1.36.12 // indirect
+	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

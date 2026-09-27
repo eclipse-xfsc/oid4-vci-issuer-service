@@ -65,6 +65,7 @@ github.com/cloudwego/base64x v0.1.7/go.mod h1:Cu1PV9zfrSf7ET2tIbWbbEy7jO7HHJ13q4
 github.com/cloudwego/iasm v0.2.0/go.mod h1:8rXZaNYT2n95jn+zTI1sDr+IgcD2GVs0nlbbQPiEFhY=
 github.com/cncf/xds/go v0.0.0-20251022180443-0feb69152e9f/go.mod h1:HlzOvOjVBOfTGSRXRyY0OiCS/3J1akRGQQpRO/7zyF4=
 github.com/cpuguy83/go-md2man/v2 v2.0.0-20190314233015-f79a8a8ca69d/go.mod h1:maD7wRr/U5Z6m/iR4s+kqSMx2CaBsrgA7czyZG/E6dU=
+github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc h1:U9qPSI2PIWSS1VwoXQT9A3Wy9MM3WgvqSxFWenqJduM=
@@ -102,8 +103,12 @@ github.com/eclipse-xfsc/nats-message-library v1.5.0 h1:lazecSf2LLBw9HTVUUkaC6jgh
 github.com/eclipse-xfsc/nats-message-library v1.5.0/go.mod h1:vOqJUxJnd3K2iP++cO3erFUIl7z6XGUn2gvHlaJ8wkM=
 github.com/eclipse-xfsc/oid4-vci-authorization-bridge/v2 v2.5.0-oidvci10 h1:c9Uuap8mb4K0HvrIOfOOfLs0ojimQ/ic77eZh8LLdts=
 github.com/eclipse-xfsc/oid4-vci-authorization-bridge/v2 v2.5.0-oidvci10/go.mod h1:bz8GL+LMVLr98aoXIwvyTdj+XUGR0zHdv5D4S6WqMe4=
+github.com/eclipse-xfsc/oid4-vci-authorization-bridge/v2 v2.5.6-oidvci10 h1:OhVKgSdE62tJX7hwfU8rzlbj8nkzQ+axpst2HLpfuEI=
+github.com/eclipse-xfsc/oid4-vci-authorization-bridge/v2 v2.5.6-oidvci10/go.mod h1:StALl348Rzr7Nq02UIrMrSSfY2rqhUObQ/2LKVXlpsI=
 github.com/eclipse-xfsc/oid4-vci-authorization-bridge/v2 v2.5.6 h1:ZBCy9fpsolD/brbv4FQaKLzBVZoaZ1LwG1ky6+7kDIE=
 github.com/eclipse-xfsc/oid4-vci-authorization-bridge/v2 v2.5.6/go.mod h1:PJ0lMOs47DGMILzSXkqsU4IvbvzORrlwqcS0w/fHipU=
+github.com/eclipse-xfsc/oid4-vci-authorization-bridge/v2 v2.5.7 h1:Fv9ZZ1bEV1H8d6i6z3/Na8eNjDNUE4N8Hw+o6VBcPkc=
+github.com/eclipse-xfsc/oid4-vci-authorization-bridge/v2 v2.5.7/go.mod h1:XEpR9/M3cMnnL9q04c7miXVKH0Ny2/9NpBRVcjFB3wI=
 github.com/eclipse-xfsc/oid4-vci-vp-library v1.7.2-oidvci10 h1:d3crgl2cgTJEVKbx7b5ylumoyochrrmKHe7h3uegZCc=
 github.com/eclipse-xfsc/oid4-vci-vp-library v1.7.2-oidvci10/go.mod h1:z3IaBHrKd+ku3eDMDSMSpWLsLNJY/Qn1kZgZE88uC60=
 github.com/eclipse-xfsc/oid4-vci-vp-library v1.8.0-oidvci10 h1:wSO5Kou0dt2PZeLMlqnpBng/ooFb/MU/CPqK9pi96hU=
@@ -263,8 +268,11 @@ github.com/klauspost/cpuid/v2 v2.2.10/go.mod h1:hqwkgyIinND0mEev00jJYCxPNVRVXFQe
 github.com/klauspost/cpuid/v2 v2.4.0 h1:S6Hrbc7+ywsr0r+RLapfGBHfyefhCTwEh3A0tV913Dw=
 github.com/klauspost/cpuid/v2 v2.4.0/go.mod h1:19jmZ9mjzoF//ddRSUsv0zfBTJWh3QJh9FNxZTMrGxU=
 github.com/knz/go-libedit v1.10.1/go.mod h1:MZTVkCWyz0oBc7JOWP3wNAzd002ZbM/5hgShxwh4x8M=
+github.com/kr/pretty v0.2.1/go.mod h1:ipq/a2n7PKx3OHsz4KJII5eveXtPO4qwEXGdVfWzfnI=
 github.com/kr/pretty v0.3.1 h1:flRD4NNwYAUpkphVc1HcthR4KEIFJ65n8Mw5qdRn3LE=
 github.com/kr/pretty v0.3.1/go.mod h1:hoEshYVHaxMs3cyo3Yncou5ZscifuDolrwPKZanG3xk=
+github.com/kr/pty v1.1.1/go.mod h1:pFQYn66WHrOpPYNljwOMqo10TkYh1fy3cYio2l3bCsQ=
+github.com/kr/text v0.1.0/go.mod h1:4Jbv+DJW3UT/LiOwJeYQe1efqtUx/iVham/4vfdArNI=
 github.com/kr/text v0.2.0 h1:5Nx0Ya0ZqY2ygV366QzturHI13Jq95ApcVaJBhpS+AY=
 github.com/kr/text v0.2.0/go.mod h1:eLer722TekiGuMkidMxC/pM04lWEeraHUUmBw8l2grE=
 github.com/leodido/go-urn v1.4.0 h1:WT9HwE9SGECu3lg4d/dIA+jxlljEa1/ffXKmRjqdmIQ=
@@ -329,6 +337,7 @@ github.com/pierrec/lz4/v4 v4.1.21 h1:yOVMLb6qSIDP67pl/5F7RepeKYu/VmTyEXvuMI5d9mQ
 github.com/pierrec/lz4/v4 v4.1.21/go.mod h1:gZWDp/Ze/IJXGXf23ltt2EXimqmTUXEy0GFuRQyBid4=
 github.com/pierrec/lz4/v4 v4.1.29 h1:CDQY6qZOLI4DW0Nx6R1vRrifrCeQHnNXkMb0hZWXFjg=
 github.com/pierrec/lz4/v4 v4.1.29/go.mod h1:EoQMVJgeeEOMsCqCzqFm2O0cJvljX2nGZjcRIPL34O4=
+github.com/pkg/diff v0.0.0-20210226163009-20ebb0f2a09e/go.mod h1:pJLUxLENpZxwdsKMEsNbx1VGcRFpLqf3715MtcvvzbA=
 github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
 github.com/planetscale/vtprotobuf v0.6.1-0.20240319094008-0393e58bdf10/go.mod h1:t/avpk3KcrXxUnYOhZhMXJlSEyie6gQbtLq5NM3loB8=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
@@ -346,6 +355,7 @@ github.com/redis/go-redis/v9 v9.7.3/go.mod h1:bGUrSggJ9X9GUmZpZNEOQKaANxSGgOEBRl
 github.com/redis/go-redis/v9 v9.22.0 h1:laDvpYXTJtZLloinw1fA5Kqd6HAEH2XKxOkG/PDq2F0=
 github.com/redis/go-redis/v9 v9.22.0/go.mod h1:y2g0Wj8rQvuK0ELM+oxSudcLtC09JScs98I/X9gRWY4=
 github.com/rivo/uniseg v0.4.7/go.mod h1:FN3SvrM+Zdj16jyLfmOkMNblXMcoc8DfTHruCPUcx88=
+github.com/rogpeppe/go-internal v1.9.0/go.mod h1:WtVeX8xhTBvf0smdhujwtBcq4Qrzq/fJaraNFVN+nFs=
 github.com/rogpeppe/go-internal v1.11.0 h1:cWPaGQEPrBb5/AsnsZesgZZ9yb1OQ+GOISoDNXVBh4M=
 github.com/rogpeppe/go-internal v1.11.0/go.mod h1:ddIwULY96R17DhadqLgMfk9H9tvdUzkipdSkR5nkCZA=
 github.com/rs/xid v1.6.0/go.mod h1:7XoLgs4eV+QndskICGsho+ADou8ySMSjJKDIan90Nz0=
