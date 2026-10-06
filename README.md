@@ -6,7 +6,12 @@ The issuing service frame is a encapsulation for the OID4VC [issuing endpoint](h
 ![Overview](./docs/images/Issuing-Service.drawio.png "Issuing Service Frame Overview")
 
 
-Note: The implementation of the OID protocol is a early state of february. There is currently no TX_Code in it, and the PIN still used. (waiting for the final release of the OID workgroup)
+Specification: This service implements the OpenID for Verifiable Credential Issuance (OpenID4VCI / OID4VCI) protocol. The protocol has been finalized as OpenID for Verifiable Credential Issuance 1.0 by the OpenID Foundation.
+
+For the normative specification, see:
+https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-final.html
+
+Please note that individual features of the OID4VCI 1.0 specification may not yet be fully supported by this implementation.
 
 # Flows
 
